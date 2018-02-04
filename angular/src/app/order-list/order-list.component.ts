@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from './order';
+import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-order-list',
@@ -13,12 +15,19 @@ export class OrderListComponent implements OnInit {
     { id: 3, name: 'product3', price: 94, status: false },
     { id: 4, name: 'product4', price: 654.99, status: false }
   ];
-
-  constructor() { }
+  public products: Array<Product>;
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
+
   }
-  submitOrder() {
+  
+  initProducts() {
+    this.productService.getProducts().then(products => this.products = products);
+    console.log("sdfusdc");
+    
+  }
+ /* submitOrder() {
     console.log(this.orders[0].status);
-  }
+  }*/
 }

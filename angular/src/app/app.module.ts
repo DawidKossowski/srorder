@@ -9,6 +9,7 @@ import { Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import {BikeService} from './bike.service';
 import { BikesComponent } from './bikes/bikes.component';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { BikesComponent } from './bikes/bikes.component';
     FormsModule,
     HttpModule
   ],
-  providers: [BikeService],
+  providers: [BikeService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
