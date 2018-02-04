@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from './order';
-import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Product } from './product';
+import { ProductService } from './service/product.service';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
 })
-export class OrderListComponent implements OnInit {
-  public orders: Array<Order> = [
+export class ProductListComponent implements OnInit {
+  public staticProducts: Array<Order> = [
     { id: 1, name: 'product1', price: 44.50, status: false },
     { id: 2, name: 'product2', price: 224.62, status: false },
     { id: 3, name: 'product3', price: 94, status: false },
@@ -21,13 +21,11 @@ export class OrderListComponent implements OnInit {
   ngOnInit() {
 
   }
-  
+
   initProducts() {
     this.productService.getProducts().then(products => this.products = products);
-    console.log("sdfusdc");
-    
   }
- /* submitOrder() {
-    console.log(this.orders[0].status);
-  }*/
+  submitOrder() {
+    console.log('x');
+  }
 }

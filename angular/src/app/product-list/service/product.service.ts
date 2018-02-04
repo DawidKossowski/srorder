@@ -4,23 +4,23 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Bike } from './bike';
+import { Product } from '../product';
 
 
 @Injectable()
 
-export class BikeService {
+export class ProductService {
 
   constructor(private http: Http) {
 
   }
 
-  private bikesUrl = '/api/allBikes';
+  private productsUrl = '/api/allProducts';
 
-  getBikes(): Promise<Bike[]> {
-    return this.http.get(this.bikesUrl)
+  getProducts(): Promise<Product[]> {
+    return this.http.get(this.productsUrl)
       .toPromise()
-      .then(response => response.json() as Bike[])
+      .then(response => response.json() as Product[])
       .catch(this.handleError);
   }
 
