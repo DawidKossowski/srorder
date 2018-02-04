@@ -1,0 +1,12 @@
+<form #addProductFrom="ngForm" (ngSubmit)="submitProduct(addProductFrom)" > 
+  <div class="form-group"> 
+    <label for="productName">Product name</label> 
+    <input type="text" class="form-control" name ="productName" id="productName" placeholder="Enter product name" required ngModel > 
+  </div> 
+  <div class="form-group"> 
+    <label for="productPrice">Price</label> 
+    <input type="text" class="form-control" name= "productPrice" id="productPrice" placeholder="Enter price" required ngModel> 
+  </div> 
+   
+  <button type="submit" class="btn btn-primary">Submit</button> 
+</form>
