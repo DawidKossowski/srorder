@@ -2,5 +2,5 @@
 .vs
 node_modules/
 build
-.gradle/
+.gradle
 .settings/
