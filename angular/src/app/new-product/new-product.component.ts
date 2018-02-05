@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'; 
 import { NgForm } from '@angular/forms'; 
- 
+ import {NewProductService} from './service/new-product.service'
  
 @Component({ 
   selector: 'app-new-product', 
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 }) 
 export class NewProductComponent implements OnInit { 
  
-  constructor() { } 
+  constructor(private NewProductService: NewProductService) { } 
  
   ngOnInit() { 
   } 
