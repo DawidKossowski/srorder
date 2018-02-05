@@ -5,7 +5,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Product } from '../../product-list/product';
-import { ADDRGETNETWORKPARAMS } from 'dns';
+
 
 
 @Injectable()
@@ -18,9 +18,8 @@ export class NewProductService {
 
   private productsUrl = '/api/addProduct';
 
-  addProduct(product: Product): Promise<Product[]> {
-      
-    return this.http.post(this.productsUrl, {name: product.name, price: product.price  }  )
+  addProduct( name: string, price: number): Promise<string> {
+    return this.http.get(this.productsUrl, { params: { name: name, price: price } }  )
       .toPromise()
       .then()
       .catch(this.handleError);

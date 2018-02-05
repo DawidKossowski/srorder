@@ -1,12 +1,21 @@
-<form #addProductFrom="ngForm" (ngSubmit)="submitProduct(addProductFrom)" > 
-  <div class="form-group"> 
-    <label for="productName">Product name</label> 
-    <input type="text" class="form-control" name ="productName" id="productName" placeholder="Enter product name" required ngModel > 
-  </div> 
-  <div class="form-group"> 
-    <label for="productPrice">Price</label> 
-    <input type="text" class="form-control" name= "productPrice" id="productPrice" placeholder="Enter price" required ngModel> 
-  </div> 
-   
-  <button type="submit" class="btn btn-primary">Submit</button> 
+<form #addProductFrom="ngForm" (ngSubmit)="submitProduct(addProductFrom)" >
+  <div class="form-group">
+    <label for="productName">Product name</label>
+    <input [(ngModel)]="name" #productName="ngModel" type="text" class="form-control" name ="productName" id="productName" placeholder="Enter product name" required ngModel minlength="3" />
+  </div>
+  <div *ngIf="productName.invalid && productName.touched"
+       class="alert alert-danger">
+    Name must be at least 3 characters long.
+  </div>
+
+  <div class="form-group">
+    <label for="productPrice">Price</label>
+    <input [(ngModel)]="price" #productPrice="ngModel" type="number" min ="0" max="999999" class="form-control" name= "productPrice" id="productPrice" placeholder="Enter price" required ngModel>
+  </div>
+  <div *ngIf="productPrice.invalid && productPrice.touched"
+       class="alert alert-danger">
+    The price is incorrect.
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!addProductFrom.form.valid">Submit</button>
 </form>
