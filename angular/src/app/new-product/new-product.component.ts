@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; 
 import { NgForm } from '@angular/forms'; 
- import {NewProductService} from './service/new-product.service'
+ import {NewProductService} from './service/new-product.service';
+ import {Product} from '../product-list/product'
  
 @Component({ 
   selector: 'app-new-product', 
@@ -16,6 +17,7 @@ export class NewProductComponent implements OnInit {
  
   submitProduct(form: NgForm) { 
     console.log(form.value); 
+
  
   } 
 }
