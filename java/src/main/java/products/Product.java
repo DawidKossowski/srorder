@@ -15,6 +15,9 @@ public class Product {
 
     private Double price;
 
+	private Integer amount;
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -37,6 +40,14 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
     
     

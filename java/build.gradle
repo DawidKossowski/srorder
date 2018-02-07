@@ -13,7 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-//apply plugin: 'idea' chyba
+//apply plugin: 'idea' chyba nie
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -29,7 +29,12 @@ repositories {
 
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "org.springframework.boot:spring-boot-starter-logging"
+        exclude module: "logback-classic"
+        exclude module: "log4j-over-slf4j"
+    }
+
     compile('org.springframework.boot:spring-boot-starter-jersey')
 	
 	// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
@@ -38,6 +43,7 @@ dependencies {
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'
 
-	
+    //compile('org.springframework.boot:spring-boot-starter-log4j2')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

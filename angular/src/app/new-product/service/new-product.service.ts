@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-
-import { Product } from '../../product-list/product';
-
-
 
 @Injectable()
 
@@ -18,8 +13,8 @@ export class NewProductService {
 
   private productsUrl = '/api/addProduct';
 
-  addProduct( name: string, price: number): Promise<string> {
-    return this.http.get(this.productsUrl, { params: { name: name, price: price } }  )
+  addProduct( name: string, price: number, amount: number): Promise<string> {
+    return this.http.get(this.productsUrl, { params: { name: name, price: price, amount: amount } }  )
       .toPromise()
       .then()
       .catch(this.handleError);

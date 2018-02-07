@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,14 @@ export class HeaderComponent {
   constructor() { }
 
   isIn = false;
+  isInDropdown = false;
+
   toggleState() {
     this.isIn = !this.isIn;
+  }
+
+  toggleStateDropdown() {
+    this.isInDropdown = !this.isInDropdown;
+    return false;
   }
 }

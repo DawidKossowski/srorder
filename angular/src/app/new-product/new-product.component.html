@@ -17,5 +17,17 @@
     The price is incorrect.
   </div>
 
+  <div class="form-group">
+    <label for="productAmount">Amount</label>
+    <input [(ngModel)]="amount" #productAmount="ngModel" type="number" min ="0" max="999999" class="form-control" name= "productAmount" id="productAmount" placeholder="Enter amount" required ngModel>
+  </div>
+  <div *ngIf="productAmount.invalid && productAmount.touched"
+       class="alert alert-danger">
+    The amount is incorrect.
+  </div>
+
   <button type="submit" class="btn btn-primary" [disabled]="!addProductFrom.form.valid">Submit</button>
 </form>
+
+
+<button (click)="test()">CHUJ</button>
