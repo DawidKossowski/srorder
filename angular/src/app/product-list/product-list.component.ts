@@ -9,6 +9,7 @@ import { ProductService } from './service/product.service';
 })
 export class ProductListComponent implements OnInit {
   public products: Array<Product>;
+  public checked: boolean[] = [];
 
   constructor(private productService: ProductService) { }
 
@@ -16,7 +17,10 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().then(products => this.products = products);
   }
 
+  updateChecked(option, event) {
+    this.checked[option] = event.target.checked;
+  }
+
   submitOrder() {
-    console.log('x');
   }
 }

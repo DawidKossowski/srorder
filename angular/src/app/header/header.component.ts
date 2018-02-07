@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +16,19 @@ export class HeaderComponent {
     this.isIn = !this.isIn;
   }
 
-  toggleStateDropdown() {
-    this.isInDropdown = !this.isInDropdown;
+  toggleStateDropdown(event) {
+    if (event.target.closest('.dropdown-toggle')) {
+      this.isInDropdown = !this.isInDropdown;
+    } else {
+      this.isInDropdown = false;
+    }
     return false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (event.target.className !== 'dropdown-toggle') {
+      this.isInDropdown = false;
+    }
   }
 }

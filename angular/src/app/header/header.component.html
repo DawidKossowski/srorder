@@ -18,7 +18,10 @@
         </li>
         <li class="dropdown"
             [ngClass]="{'open': isInDropdown}">
-          <a href="#" (click)="toggleStateDropdown()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Operations<span class="caret"></span></a>
+          <a href="#" (click)="toggleStateDropdown($event)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+            Operations
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li><a routerLink="/newProduct">Add product</a></li>
           </ul>
@@ -27,3 +30,4 @@
     </div>
   </div>
 </nav>
+
