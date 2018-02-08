@@ -26,7 +26,7 @@ export class ProductService {
   }
 
   createOrder(productsId: Array<Number>): Promise<string> {
-    return this.http.post(this.orderUrl, productsId)
+    return this.http.get(this.orderUrl, productsId)
       .toPromise()
       .then()
       .catch(this.handleError);

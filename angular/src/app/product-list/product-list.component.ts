@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
 import { ProductService } from './service/product.service';
+import {logger} from "codelyzer/util/logger";
 
 @Component({
   selector: 'app-product-list',
@@ -34,6 +35,7 @@ export class ProductListComponent implements OnInit {
       }
     });
 
-    this.productService.createOrder(_idToSend);
+    this.productService.createOrder(_idToSend).catch();
+    console.log("submit"); //to sie juz nie loguje do chuja
   }
 }
