@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,14 +23,11 @@ public class OrdersController {
 
 
     @RequestMapping(path="/createOrder")
-    public @ResponseBody String createOrder(@RequestParam int[] products) {
+    public String createOrder(@RequestBody int[] lista) {
+       
         LOG.warn("x");
         return "Created";
     }
 
-    @RequestMapping(path="/api/createOrder")
-    public @ResponseBody String createOrders(@RequestParam int[] products) {
-        LOG.warn("xx");
-        return "Created";
-    }
+
 }

@@ -36,6 +36,6 @@ export class ProductListComponent implements OnInit {
     });
 
     this.productService.createOrder(_idToSend).catch();
-    console.log("submit"); //to sie juz nie loguje do chuja
+    console.log("submit");
   }
 }
