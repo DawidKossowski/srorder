@@ -1,7 +1,5 @@
 package hello;
 
-
-import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import jersey.repackaged.com.google.common.base.Optional;
+
 import hello.Product;
 import hello.ProductRepository;
 
@@ -53,10 +51,4 @@ public class ProductController {
 		// This returns a JSON or XML with the users
 		return productRepository.findAll();
 	}
-
-	@RequestMapping(path="/kurwa")
-	public void getDomains(@RequestBody String x) {
-		LOG.warn(x);
-	}
-
 }

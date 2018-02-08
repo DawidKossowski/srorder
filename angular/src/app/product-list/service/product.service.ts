@@ -16,11 +16,19 @@ export class ProductService {
   }
 
   private productsUrl = '/api/allProducts';
+  private orderUrl = '/api/createOrder';
 
   getProducts(): Promise<Product[]> {
     return this.http.get(this.productsUrl)
       .toPromise()
       .then(response => response.json() as Product[])
+      .catch(this.handleError);
+  }
+
+  createOrder(productsId: Array<Number>): Promise<string> {
+    return this.http.post(this.orderUrl, productsId)
+      .toPromise()
+      .then()
       .catch(this.handleError);
   }
 

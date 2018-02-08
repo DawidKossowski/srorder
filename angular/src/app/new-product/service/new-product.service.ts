@@ -16,7 +16,13 @@ export class NewProductService {
   addProduct( name: string, price: number, amount: number): Promise<string> {
     return this.http.get(this.productsUrl, { params: { name: name, price: price, amount: amount } }  )
       .toPromise()
-      .then()
+      .then(response => {
+        if (response.status === 200) {
+          alert(response.text());
+        } else {
+          alert('Error');
+        }
+      })
       .catch(this.handleError);
   }
 

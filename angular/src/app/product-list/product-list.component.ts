@@ -19,8 +19,21 @@ export class ProductListComponent implements OnInit {
 
   updateChecked(option, event) {
     this.checked[option] = event.target.checked;
+    if (event.target.checked === false) {
+      if (!this.checked.find(e => e === true)) {
+        this.checked = [];
+      }
+    }
   }
 
   submitOrder() {
+    const _idToSend: Array<Number> = [];
+    this.checked.forEach((el, index) => {
+      if (el) {
+        _idToSend.push(index);
+      }
+    });
+
+    //this.productService.createOrder(_idToSend);
   }
 }
