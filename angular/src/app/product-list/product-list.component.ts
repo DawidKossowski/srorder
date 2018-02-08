@@ -34,6 +34,6 @@ export class ProductListComponent implements OnInit {
       }
     });
 
-    //this.productService.createOrder(_idToSend);
+    this.productService.createOrder(_idToSend);
   }
 }
