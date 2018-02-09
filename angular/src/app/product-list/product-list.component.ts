@@ -36,6 +36,5 @@ export class ProductListComponent implements OnInit {
     });
 
     this.productService.createOrder(_idToSend).catch();
-    console.log("submit");
   }
 }

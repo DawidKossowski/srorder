@@ -9,4 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface ProductRepository extends CrudRepository<Product, Long> {
         @Query("SELECT p FROM Product p WHERE p.name = :name")
         hello.Product findProductByName(@Param("name") String name);
+
+        @Query("SELECT p FROM Product p WHERE p.id = :id")
+        hello.Product findProductByIntegerId(@Param("id") Integer id);
 }

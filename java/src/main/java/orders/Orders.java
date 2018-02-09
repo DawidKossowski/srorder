@@ -31,7 +31,4 @@ public class Orders {
     public void setDate(Date date) {
         this.date = date;
     }
-
-
-
 }

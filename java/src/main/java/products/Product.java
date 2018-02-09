@@ -49,7 +49,5 @@ public class Product {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-    
-    
 }
 
