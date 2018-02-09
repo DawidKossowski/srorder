@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
 import { ProductService } from './service/product.service';
-import {logger} from "codelyzer/util/logger";
 
 @Component({
   selector: 'app-product-list',

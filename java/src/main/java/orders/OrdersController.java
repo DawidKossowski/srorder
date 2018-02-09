@@ -39,16 +39,17 @@ public class OrdersController {
 
         for (Integer x: products) {
             hello.Order_Product order_product = new hello.Order_Product();
-            order_product.setProductId(x);
-            order_product.setOrderId(o.getId());
 
 
-            //order_product.setProduct(p.findProductByIntegerId(x));
+
+            order_product.setProduct( p.findProductByIntegerId(x));
+            order_product.setOrder(o);
             order_productRepository.save(order_product);
+            LOG.info("new order crated");
 
         }
 
-        LOG.info("new order crated");
+
         return "Created";
     }
 

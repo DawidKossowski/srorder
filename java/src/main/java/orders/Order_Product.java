@@ -5,9 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
-
 
 @Entity
 public class Order_Product {
@@ -15,13 +14,13 @@ public class Order_Product {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private Integer orderId;
+    @OneToOne
+    @JoinColumn(name="orderId")
+    private Orders order;
 
-    private Integer productId;
-
-    /*@ManyToOne
-    @JoinColumn(name="id", table= hello.Product)
-    private Product product;*/
+    @OneToOne
+    @JoinColumn(name="productId")
+    private Product product;
 
     public Integer getId() {
         return id;
@@ -31,28 +30,19 @@ public class Order_Product {
         this.id = id;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-
-    this.productId = productId;
-    }
-
-   /* public Product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
     public void setProduct(hello.Product product) {
-        this.product=product;
-    }*/
+        this.product = product;
+    }
+
+    public hello.Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(hello.Orders order) {
+        this.order = order;
+    }
 }

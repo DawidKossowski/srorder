@@ -8,4 +8,6 @@ import org.springframework.data.repository.query.Param;
 // CRUD refers Create, Read, Update, Delete
 public interface OrdersRepository extends CrudRepository<hello.Orders, Long> {
 
+    @Query("SELECT o FROM Orders o WHERE o.id = :id")
+    hello.Orders findOrderByIntegerId(@Param("id") Integer id);
 }

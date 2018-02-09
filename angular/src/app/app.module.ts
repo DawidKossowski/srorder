@@ -11,13 +11,15 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { AppRoutingModule } from './app-routing.module';
 import {NewProductService} from './new-product/service/new-product.service';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProductListComponent,
-    NewProductComponent
+    NewProductComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
