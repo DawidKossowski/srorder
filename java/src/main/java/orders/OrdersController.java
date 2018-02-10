@@ -1,5 +1,6 @@
 package hello;
 
+import ch.qos.logback.core.util.COWArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import java.util.*;
 import java.util.Date;
+import java.util.List;
+import hello.Product;
 
 
 @Controller    // This means that this class is a Controller
@@ -53,5 +58,29 @@ public class OrdersController {
         return "Created";
     }
 
+    @GetMapping (path="/allOrders")
+    public @ResponseBody Iterable<hello.ViewOrder> getAllOrders() {
+        ArrayList<hello.ViewOrder> result = new ArrayList<hello.ViewOrder>();
+        Iterable<hello.Order_Product> allOrders = order_productRepository.findAll();
 
+        for (hello.Order_Product order: allOrders
+             ) {
+            hello.ViewOrder vieworder = new hello.ViewOrder();
+            //vieworder.order = order.getOrder();//mozna w sumie zmienic zeby Vieworder mial order w polu ale sama nie wiem 
+            vieworder.date = order.getOrder().getDate();
+            //vieworder.products.add(order.getProduct());
+            result.add(vieworder);
+            LOG.warn(order.getProduct().getName());
+        }
+
+
+
+       /* for (hello.Order_Product order: op
+                ) {
+            LOG.info("aa" + order.getId() + " " +" " + (hello.Product)order.getProduct());
+            LOG.warn(( order.getProduct()).getName());
+        }*/
+
+        return result;
+    }
 }

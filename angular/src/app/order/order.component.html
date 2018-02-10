@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Date</th>
+    <th>Products</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of orders">
+    <td>{{order.id}}</td>
+    <td>{{order.date}}</td>
+
+  </tr>
+  </tbody>
+</table>

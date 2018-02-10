@@ -12,6 +12,7 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { AppRoutingModule } from './app-routing.module';
 import {NewProductService} from './new-product/service/new-product.service';
 import { OrderComponent } from './order/order.component';
+import {OrderService} from "./order/service/order.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { OrderComponent } from './order/order.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService, NewProductService],
+  providers: [ProductService, NewProductService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
