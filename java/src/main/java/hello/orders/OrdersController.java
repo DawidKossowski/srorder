@@ -16,6 +16,7 @@ import java.util.*;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 import hello.products.Product;
 import hello.products.ProductRepository;
@@ -57,10 +58,8 @@ public class OrdersController {
     @GetMapping (path="/allOrders")
     public @ResponseBody Iterable<ViewOrder> getAllOrders() {
         List<ViewOrder> result = new ArrayList<ViewOrder>();
-        Iterable<Order_Product> allOrders = order_productRepository.findAll();
 
-
-        for (Order_Product order: allOrders) {
+        for (Order_Product order: order_productRepository.findAll()) {
 
             if(!result.stream().anyMatch(o -> o.id.equals(order.getOrder().getId()))) {
                 ViewOrder vieworder = new ViewOrder();
@@ -73,17 +72,20 @@ public class OrdersController {
             }
             else {
                 AtomicInteger position = new AtomicInteger();
+
                 result.stream().peek( x-> position.incrementAndGet())
                 .filter(a->a.id.equals(order.getOrder().getId()));
 
-                result.get(position.get()).products.add(order.getProduct());
+                OptionalInt index = IntStream.range(0, result.size())
+                        .filter(i -> order.getOrder().getId().equals(result.get(i).id)).findFirst();
+
+                //result.get(position.get()).products.add(order.getProduct());
+                ViewOrder viewOrder = result.get(position.get());
+                viewOrder.products.add(order.getProduct());
+
+                result.set(position.get(), viewOrder);
             }
-
-
-            LOG.warn(order.getProduct().getName());
         }
-
-
 
         return result;
     }
