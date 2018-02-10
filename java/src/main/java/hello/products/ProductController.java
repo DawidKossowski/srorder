@@ -46,7 +46,6 @@ public class ProductController {
 	@GetMapping(path="/allProducts")
 	public @ResponseBody Iterable<Product> getAllProducts() {
 		// This returns a JSON or XML with the users
-		LOG.warn("test");
 		return productRepository.findAll();
 	}
 }
