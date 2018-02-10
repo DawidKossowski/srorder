@@ -1,16 +1,16 @@
 package hello.orders;
 
-import java.util.*;
-import java.util.Date;
+        import java.util.*;
+        import java.util.Date;
 
-import hello.products.Product;
+        import hello.products.Product;
+
+        import javax.persistence.criteria.CriteriaBuilder;
 
 public class ViewOrder {
 
     public Integer id;
-
-   // public hello.Orders order;
     public Date date;
 
-    public ArrayList<Product> products;
+    public List<Product> products;
 }

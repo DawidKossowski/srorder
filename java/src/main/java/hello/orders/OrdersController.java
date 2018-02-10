@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import hello.products.Product;
 import hello.products.ProductRepository;
@@ -55,23 +56,34 @@ public class OrdersController {
 
     @GetMapping (path="/allOrders")
     public @ResponseBody Iterable<ViewOrder> getAllOrders() {
-        ArrayList<ViewOrder> result = new ArrayList<ViewOrder>();
+        List<ViewOrder> result = new ArrayList<ViewOrder>();
         Iterable<Order_Product> allOrders = order_productRepository.findAll();
 
+
         for (Order_Product order: allOrders) {
-            ViewOrder vieworder = new ViewOrder();
-            //vieworder.order = order.getOrder();//mozna w sumie zmienic zeby Vieworder mial order w polu ale sama nie wiem 
-            vieworder.date = order.getOrder().getDate();
-            //vieworder.products.add(order.getProduct());
-            result.add(vieworder);
+
+            if(!result.stream().anyMatch(o -> o.id.equals(order.getOrder().getId()))) {
+                ViewOrder vieworder = new ViewOrder();
+                vieworder.products = new ArrayList<>();
+                vieworder.id = order.getOrder().getId();
+                vieworder.date = order.getOrder().getDate();
+
+                vieworder.products.add(order.getProduct());
+                result.add(vieworder);
+            }
+            else {
+                AtomicInteger position = new AtomicInteger();
+                result.stream().peek( x-> position.incrementAndGet())
+                .filter(a->a.id.equals(order.getOrder().getId()));
+
+                result.get(position.get()).products.add(order.getProduct());
+            }
+
+
             LOG.warn(order.getProduct().getName());
         }
 
-       /* for (hello.Order_Product order: op
-                ) {
-            LOG.info("aa" + order.getId() + " " +" " + (hello.Product)order.getProduct());
-            LOG.warn(( order.getProduct()).getName());
-        }*/
+
 
         return result;
     }
