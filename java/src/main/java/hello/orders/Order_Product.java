@@ -1,4 +1,4 @@
-package hello;
+package hello.orders;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
+
+import hello.products.Product;
 
 @Entity
 public class Order_Product {
@@ -34,15 +36,15 @@ public class Order_Product {
         return product;
     }
 
-    public void setProduct(hello.Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public hello.Orders getOrder() {
+    public Orders getOrder() {
         return order;
     }
 
-    public void setOrder(hello.Orders order) {
+    public void setOrder(Orders order) {
         this.order = order;
     }
 }

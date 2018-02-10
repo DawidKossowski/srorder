@@ -1,4 +1,4 @@
-package hello;
+package hello.orders;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

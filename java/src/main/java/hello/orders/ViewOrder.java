@@ -1,7 +1,9 @@
-package hello;
+package hello.orders;
+
 import java.util.*;
 import java.util.Date;
 
+import hello.products.Product;
 
 public class ViewOrder {
 
@@ -10,5 +12,5 @@ public class ViewOrder {
    // public hello.Orders order;
     public Date date;
 
-    public ArrayList<hello.Product> products;
+    public ArrayList<Product> products;
 }
