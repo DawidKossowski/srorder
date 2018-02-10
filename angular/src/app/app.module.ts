@@ -3,16 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { HttpModule } from '@angular/http';
 import { ProductService } from './product-list/service/product.service';
 import { ProductListComponent } from './product-list/product-list.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { AppRoutingModule } from './app-routing.module';
-import {NewProductService} from './new-product/service/new-product.service';
+import { NewProductService} from './new-product/service/new-product.service';
 import { OrderComponent } from './order/order.component';
-import {OrderService} from "./order/service/order.service";
+import { OrderService } from './order/service/order.service';
+import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsComponent } from './google-maps/google-maps.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,17 @@ import {OrderService} from "./order/service/order.service";
     HeaderComponent,
     ProductListComponent,
     NewProductComponent,
-    OrderComponent
+    OrderComponent,
+    GoogleMapsComponent
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD7Ox1wwZHU2kECZIRvakG9nK0LmNgSKUM',
+      libraries: ['places']
+    }),
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule
   ],

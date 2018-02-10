@@ -71,19 +71,7 @@ public class OrdersController {
                 result.add(vieworder);
             }
             else {
-                AtomicInteger position = new AtomicInteger();
-
-                result.stream().peek( x-> position.incrementAndGet())
-                .filter(a->a.id.equals(order.getOrder().getId()));
-
-                OptionalInt index = IntStream.range(0, result.size())
-                        .filter(i -> order.getOrder().getId().equals(result.get(i).id)).findFirst();
-
-                //result.get(position.get()).products.add(order.getProduct());
-                ViewOrder viewOrder = result.get(position.get());
-                viewOrder.products.add(order.getProduct());
-
-                result.set(position.get(), viewOrder);
+                result.get(order.getOrder().getId() - 1).products.add(order.getProduct());
             }
         }
 
