@@ -1,0 +1,29 @@
+.cart {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: 300ms;
+}
+
+.cart.open {
+  visibility: visible;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.cart_content {
+  float: right;
+  width: 50%;
+  height: 100%;
+  background: white;
+  transition: 700ms;
+  transform-origin: 100% 50%;
+  transform: scaleX(0);
+}
+
+.cart.open .cart_content {
+  transform: scaleX(1);
+}
