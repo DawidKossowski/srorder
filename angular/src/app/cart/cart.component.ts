@@ -13,11 +13,11 @@ export class CartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.cartContent=['kaszanka', 'piguly'];
+    this.cartContent = JSON.parse(localStorage.getItem('cart'));
   }
 
-  viewCart(event){
-    if (event.target.closest('.cart')|| event.target.closest('.cartBtn')) {
+  viewCart(event) {
+    if (event.target.closest('.cart') || event.target.closest('.cartBtn')) {
       this.showHide = !this.showHide;
     } else {
       this.showHide = false;
@@ -27,12 +27,12 @@ export class CartComponent implements OnInit {
   }
 
   close() {
-    this.showHide= false;
+    this.showHide = false;
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if (!( event.target.closest('.cart_content')|| event.target.closest('.cartBtn') )) {
+    if (!( event.target.closest('.cart_content') || event.target.closest('.cartBtn') )) {
       this.showHide = false;
     }
   }

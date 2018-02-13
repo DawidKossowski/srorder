@@ -28,12 +28,15 @@ export class ProductListComponent implements OnInit {
 
   submitOrder() {
     const _idToSend: Array<Number> = [];
+    const _productToCart: Array<Product> = [];
     this.checked.forEach((el, index) => {
       if (el) {
         _idToSend.push(index);
+        _productToCart.push(this.products[index]);
       }
     });
 
     this.productService.createOrder(_idToSend).catch();
+    localStorage.setItem('cart', JSON.stringify(_productToCart));
   }
 }

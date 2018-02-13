@@ -2,17 +2,12 @@
 
 <button type="button" class="cartBtn" (click)="viewCart($event)">show/hide</button>
 
-<div *ngIf="showHide">
-  <div class="cart" [ngClass]="{'open': showHide}" >
-
-    <div class="cart_content" >
-      <div *ngFor="let elem of cartContent">
-        <div>{{elem}}</div>
-
-      </div>
-      <button type="button" (click)= "close()">Close</button>
-
+<div class="cart" [ngClass]="{'open': showHide}" >
+  <div class="cart_content" >
+    <div *ngFor="let elem of cartContent">
+      <div>{{elem.name}}</div>
     </div>
-
+    <button type="button" (click)= "close()">Close</button>
   </div>
 </div>
+
