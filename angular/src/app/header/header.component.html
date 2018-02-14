@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse"> <!-- navbar-fixed-top -->
+<nav class="navbar navbar-inverse "> <!-- navbar-fixed-top -->
   <div class="container">
     <div class="navbar-header">
       <button type="button"
@@ -27,8 +27,12 @@
             <li><a routerLink="/orders">View orders</a></li>
           </ul>
         </li>
+        <li>
+          <a href="#" class="cartBtn" (click)="changeCart(true)">Cart</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
+<app-cart [showCart]="isCartOpen" [changeCartStatus]="changeCart.bind(this)"></app-cart>

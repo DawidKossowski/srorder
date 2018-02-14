@@ -1,9 +1,9 @@
-<button type="button" class="cartBtn" (click)="viewCart($event)">show/hide</button>
-
 <div class="cart" [ngClass]="{'open': showCart}" >
-  <div class="cart_content" [ngClass] = "{'empty': (cartContent.length == 0) }">
+    <div class="cart_content">
 
-    <div class="cart_header">  CART  </div>
+    <div class="cart_header">
+      <h2>CART</h2>
+    </div>
     <span *ngIf="cartContent.length == 0">
       <div class = "cart_header">Your cart is empty</div>
     </span>
@@ -16,17 +16,21 @@
           <input [(ngModel)]="elem.amount" class="item_amount" type="number" (change) = "updateStorage()"/>
           <div class="item_price">x {{elem.price}}zł</div>
         </div>
-        <button class="deleteBtn" type="button" (click) = "deleteItem(elem.id)"> x </button>
+        <button class="deleteBtn cart_btn" type="button" (click) = "deleteItem(elem.id)"> Delete </button>
       </div>
 
     </div>
 
     <div class="cart_header">
       <div class="item_name"> Total price: </div>
-      <div> {{totalPrice}}</div>
-      <button type="button" (click)= "close()">Close</button>
+      <div class="item_price"> {{totalPrice}}zł</div>
     </div>
 
+    <div>
+      <button>Submit order</button>
+    </div>
+
+    <button type="button" class="cart_close cart_btn" (click)= "this.changeCartStatus(false)">X</button>
   </div>
 </div>
 

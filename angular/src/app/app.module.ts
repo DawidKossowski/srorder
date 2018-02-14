@@ -16,6 +16,7 @@ import { OrderService } from './order/service/order.service';
 import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CartComponent } from './cart/cart.component';
     NewProductComponent,
     OrderComponent,
     GoogleMapsComponent,
-    CartComponent
+    CartComponent,
+    OrderConfirmationComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

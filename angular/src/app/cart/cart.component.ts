@@ -1,8 +1,5 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Product} from "../product-list/product";
-import {logger} from "codelyzer/util/logger";
-import {log} from "util";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-cart',
@@ -12,12 +9,10 @@ import {forEach} from "@angular/router/src/utils/collection";
 
 
 export class CartComponent implements OnInit {
-
-  private showCart: boolean;
+  @Input() private showCart: boolean;
+  @Input() public changeCartStatus: Function;
   private cartContent: Product[];
-  private totalPrice: number;
-
-
+  private totalPrice = 0;
 
   constructor() { }
 
@@ -25,43 +20,33 @@ export class CartComponent implements OnInit {
 
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
     this.cartContent.forEach( x => {
-      this.totalPrice += (<number>(<number>x.price) * x.amount);
-
+      this.totalPrice += x.price * x.amount;
     });
-
-    console.log(this.totalPrice.valueOf());
-  }
-
-  viewCart(event) {
-    if (event.target.closest('.cart') || event.target.closest('.cartBtn')) {
-      this.showCart = !this.showCart;
-    } else {
-      this.showCart = false;
-    }
-    return false;
-  }
-
-  close() {
-    this.showCart = false;
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
     //tu by mozna cos dac, zeby nie trzeba bylo dodawać kazdego kolejnego buttona do ignorowanych
     if (!( event.target.closest('.cart_content') || event.target.closest('.cartBtn') || event.target.closest('.deleteBtn') )) {
-      this.showCart = false;
+      //this.showCart = false;
+      this.changeCartStatus(false);
     }
   }
 
   deleteItem(id) {
-    this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id == id)), 1);
+    this.cartContent = this.cartContent.filter(e => e.id !== id);
+    //this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id == id)), 1);
     this.updateStorage();
   }
 
   updateStorage() {
     localStorage.setItem('cart', JSON.stringify(this.cartContent));
+
+    if (!this.cartContent.length) {
+      this.totalPrice = 0;
+    }
     this.cartContent.forEach( x => {
-      this.totalPrice += x.price *x.amount;
+      this.totalPrice += x.price * x.amount;
     });
   }
 

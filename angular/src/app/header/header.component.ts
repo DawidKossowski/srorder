@@ -1,4 +1,5 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
+import {CartComponent} from '../cart/cart.component';
 
 @Component({
   selector: 'app-header',
@@ -6,11 +7,11 @@ import {Component, ElementRef, HostListener} from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
   constructor() { }
 
   isIn = false;
   isInDropdown = false;
+  isCartOpen = false;
 
   toggleState() {
     this.isIn = !this.isIn;
@@ -30,5 +31,10 @@ export class HeaderComponent {
     if (event.target.className !== 'dropdown-toggle') {
       this.isInDropdown = false;
     }
+  }
+
+  changeCart(status: boolean) {
+    this.isCartOpen = status;
+    return false;
   }
 }
