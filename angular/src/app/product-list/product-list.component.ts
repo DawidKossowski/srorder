@@ -32,7 +32,9 @@ export class ProductListComponent implements OnInit {
     this.checked.forEach((el, index) => {
       if (el) {
         _idToSend.push(index);
-        _productToCart.push(this.products[index - 1]);
+        const p:Product = this.products[index-1];
+        p.amount = 1;
+        _productToCart.push(p);
       }
     });
 

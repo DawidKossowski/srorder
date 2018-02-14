@@ -1,13 +1,32 @@
-<button id="trigger" (click)="viewCart()" >Odpal koszyka</button>
-
 <button type="button" class="cartBtn" (click)="viewCart($event)">show/hide</button>
 
-<div class="cart" [ngClass]="{'open': showHide}" >
-  <div class="cart_content" >
+<div class="cart" [ngClass]="{'open': showCart}" >
+  <div class="cart_content" [ngClass] = "{'empty': (cartContent.length == 0) }">
+
+    <div class="cart_header">  CART  </div>
+    <span *ngIf="cartContent.length == 0">
+      <div class = "cart_header">Your cart is empty</div>
+    </span>
+
     <div *ngFor="let elem of cartContent">
-      <div>{{elem.name}}</div>
+
+      <div class="cart_item" [id] = elem.id>
+        <div class="item_name"> {{elem.name}} </div>
+        <div class="item_data">
+          <input [(ngModel)]="elem.amount" class="item_amount" type="number" (change) = "updateStorage()"/>
+          <div class="item_price">x {{elem.price}}zł</div>
+        </div>
+        <button class="deleteBtn" type="button" (click) = "deleteItem(elem.id)"> x </button>
+      </div>
+
     </div>
-    <button type="button" (click)= "close()">Close</button>
+
+    <div class="cart_header">
+      <div class="item_name"> Total price: </div>
+      <div> {{totalPrice}}</div>
+      <button type="button" (click)= "close()">Close</button>
+    </div>
+
   </div>
 </div>
 
