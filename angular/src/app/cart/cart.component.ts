@@ -1,5 +1,6 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Product} from "../product-list/product";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
   private cartContent: Product[];
   private totalPrice = 0;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 
@@ -48,6 +49,11 @@ export class CartComponent implements OnInit {
     this.cartContent.forEach( x => {
       this.totalPrice += x.price * x.amount;
     });
+  }
+
+  submitOrder() {
+    this.router.navigateByUrl('/orderConfirmation');
+    this.changeCartStatus(false);
   }
 
 }

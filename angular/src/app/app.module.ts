@@ -17,6 +17,7 @@ import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import {customerService} from "./customer/service/customer.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService, NewProductService, OrderService],
+  providers: [ProductService, NewProductService, OrderService, customerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

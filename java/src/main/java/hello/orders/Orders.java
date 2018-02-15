@@ -1,9 +1,8 @@
 package hello.orders;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import hello.Customer.Customer;
+
+import javax.persistence.*;
 
 import java.util.Date;
 
@@ -15,6 +14,10 @@ public class Orders {
     private Integer id;
 
     private Date date;
+
+   /* @OneToOne
+    @JoinColumn(name="customerId")
+    private Customer customer;*/
 
     public Integer getId() {
         return id;
@@ -31,4 +34,12 @@ public class Orders {
     public void setDate(Date date) {
         this.date = date;
     }
+
+   /* public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }*/
 }
