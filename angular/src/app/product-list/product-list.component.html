@@ -5,7 +5,6 @@
     <th>Name</th>
     <th>Price</th>
     <th>Amount</th>
-    <th>Add</th>
   </tr>
   </thead>
   <tbody>
@@ -15,8 +14,9 @@
     <td>{{product.price}}</td>
     <td>{{product.amount}}</td>
     <td>
-      <input type="checkbox" [id]=product.id class="productCheckbox"
-             [disabled]="product.amount === 0" (change)="updateChecked(product.id, $event)" />
+      <button class="btn btn-link no-padding" [disabled]="product.amount === 0" (click)="addToCart(product.id)">Add to cart</button>
+      <!-- <input type="checkbox" [id]=product.id class="productCheckbox"
+             [disabled]="product.amount === 0" (change)="updateChecked(product.id, $event)" /> -->
     </td>
   </tr>
   </tbody>

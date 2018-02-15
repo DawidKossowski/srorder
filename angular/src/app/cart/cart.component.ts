@@ -38,7 +38,7 @@ export class CartComponent implements OnInit, OnChanges {
 
   deleteItem(id) {
     this.cartContent = this.cartContent.filter(e => e.id !== id);
-    this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id == id)), 1);
+    //this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id === id)), 1);
     this.updateStorage();
   }
 

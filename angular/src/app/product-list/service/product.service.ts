@@ -8,12 +8,9 @@ import { Product } from '../product';
 
 
 @Injectable()
-
 export class ProductService {
 
-  constructor(private http: Http) {
-
-  }
+  constructor(private http: Http) { }
 
   private productsUrl = '/api/allProducts';
   private orderUrl = '/api/createOrder';
