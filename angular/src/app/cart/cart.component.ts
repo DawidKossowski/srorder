@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 import {Product} from "../product-list/product";
 import { Router } from '@angular/router';
 
@@ -9,34 +9,36 @@ import { Router } from '@angular/router';
 })
 
 
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnChanges {
   @Input() private showCart: boolean;
-  @Input() public changeCartStatus: Function;
+  @Output() public changeCartStatus = new EventEmitter<boolean>();
   private cartContent: Product[];
   private totalPrice = 0;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-
-    this.cartContent = JSON.parse(localStorage.getItem('cart'));
+    this.updateCart();
     this.cartContent.forEach( x => {
       this.totalPrice += x.price * x.amount;
     });
+  }
+
+  ngOnChanges() {
+    this.updateCart();
   }
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
     //tu by mozna cos dac, zeby nie trzeba bylo dodawać kazdego kolejnego buttona do ignorowanych
     if (!( event.target.closest('.cart_content') || event.target.closest('.cartBtn') || event.target.closest('.deleteBtn') )) {
-      //this.showCart = false;
-      this.changeCartStatus(false);
+      this.changeCartStatus.emit(false);
     }
   }
 
   deleteItem(id) {
     this.cartContent = this.cartContent.filter(e => e.id !== id);
-    //this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id == id)), 1);
+    this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id == id)), 1);
     this.updateStorage();
   }
 
@@ -51,9 +53,15 @@ export class CartComponent implements OnInit {
     });
   }
 
-  submitOrder() {
-    this.router.navigateByUrl('/orderConfirmation');
-    this.changeCartStatus(false);
+  updateCart() {
+    this.cartContent = JSON.parse(localStorage.getItem('cart'));
   }
 
+  closeCart() {
+    this.changeCartStatus.emit(false);
+  }
+
+  submitOrder() {
+    this.router.navigateByUrl('/orderConfirmation');
+  }
 }

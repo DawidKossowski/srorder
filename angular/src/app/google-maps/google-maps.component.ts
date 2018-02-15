@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
@@ -14,6 +14,7 @@ export class GoogleMapsComponent implements OnInit {
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
+  @Output() setPlaceId = new EventEmitter<string>();
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -54,6 +55,14 @@ export class GoogleMapsComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+
+          this.setPlaceId.emit(place.place_id);
+
+          /*let geocoder = new google.maps.Geocoder();
+          geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+            console.log(results);
+          });
+          console.log(place.place_id); */
         });
       });
     });

@@ -1,7 +1,7 @@
-<h1>Angular 2 + Google Maps Places Autocomplete</h1>
 <div class="form-group">
-  <input placeholder="location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+  <label for="inputAddress">Address</label>
+  <input id="inputAddress" placeholder="10 Lutego, Łódź, Polska" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
 </div>
-<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom">
   <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
 </agm-map>

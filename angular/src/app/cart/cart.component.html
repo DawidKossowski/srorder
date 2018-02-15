@@ -1,6 +1,5 @@
 <div class="cart" [ngClass]="{'open': showCart}" >
-    <div class="cart_content">
-
+  <div class="cart_content">
     <div class="cart_header">
       <h2>CART</h2>
     </div>
@@ -30,7 +29,7 @@
       <button (click)="submitOrder()">Submit order</button>
     </div>
 
-    <button type="button" class="cart_close cart_btn" (click)= "this.changeCartStatus(false)">X</button>
+    <button type="button" class="cart_close cart_btn" (click)= "closeCart()">X</button>
   </div>
 </div>
 
