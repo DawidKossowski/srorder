@@ -35,8 +35,7 @@
         </li>
 
 
-          <div *ngIf="isUserLogged; else elseBlock"   >
-          <li class="dropdown" [ngClass]="{'open': isUserMenuInDropdown}">
+          <li *ngIf="isUserLogged; else elseBlock" class=" dropdown" [ngClass]="{'open': isUserMenuInDropdownInDropdown}" >
             <a href="#" (click)="toggleStateDropdownUserMenu($event)" class="Userdropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
               Hi, {{Username}}
               <span class="caret"></span>
@@ -46,8 +45,6 @@
               <li><a routerLink="/">Logout</a></li>
             </ul>
           </li>
-        </div>
-
 
 
         <ng-template #elseBlock>

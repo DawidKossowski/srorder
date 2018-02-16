@@ -18,19 +18,31 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts().then(products => this.products = products);
+    this.productsToCart = new Array<Product>();
   }
 
   addToCart(id: number) {
     this.productsToCart = JSON.parse(localStorage.getItem('cart'));
-    if(!this.productsToCart.find(p => p.id === id)) {
+    if(this.productsToCart){
+      if(!this.productsToCart.find(p => p.id === id)) {
+        const p: Product = Object.assign({}, this.products[id - 1]);
+        p.amount = 1;
+        this.productsToCart.push(p);
+        localStorage.setItem('cart', JSON.stringify(this.productsToCart));
+        this.cartStorageService.setItem('cart', JSON.stringify(this.productsToCart));
+      } else {
+        alert('This item is currently in cart.');
+      }
+
+    } else {
       const p: Product = Object.assign({}, this.products[id - 1]);
       p.amount = 1;
+      console.log(this.productsToCart);
       this.productsToCart.push(p);
       localStorage.setItem('cart', JSON.stringify(this.productsToCart));
       this.cartStorageService.setItem('cart', JSON.stringify(this.productsToCart));
-    } else {
-      alert('This item is currently in cart.');
     }
+
   }
 
   updateChecked(option, event) {
