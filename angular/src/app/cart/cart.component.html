@@ -3,7 +3,7 @@
     <div class="cart_header">
       <h2>CART</h2>
     </div>
-    <span *ngIf="cartContent.length == 0">
+    <span *ngIf="!cartContent">
       <div class = "cart_header">Your cart is empty</div>
     </span>
 

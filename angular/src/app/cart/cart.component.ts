@@ -42,7 +42,7 @@ export class CartComponent implements OnInit, OnChanges {
   updateStorage() {
     this.cartStorageService.setItem('cart', JSON.stringify(this.cartContent));
 
-    if (!this.cartContent.length) {
+    if (!this.cartContent) {
       this.totalPrice = 0;
     } else {
       this.cartContent.forEach( x => {
@@ -54,7 +54,7 @@ export class CartComponent implements OnInit, OnChanges {
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
 
-    if (!this.cartContent.length) {
+    if (!this.cartContent) {
       this.totalPrice = 0;
     } else {
       this.cartContent.forEach( x => {
