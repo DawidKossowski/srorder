@@ -18,11 +18,10 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts().then(products => this.products = products);
-    this.productsToCart = new Array<Product>();
   }
 
   addToCart(id: number) {
-    this.productsToCart = JSON.parse(localStorage.getItem('cart'));
+    this.productsToCart = JSON.parse(localStorage.getItem('cart')) || [];
     if(this.productsToCart){
       if(!this.productsToCart.find(p => p.id === id)) {
         const p: Product = Object.assign({}, this.products[id - 1]);
