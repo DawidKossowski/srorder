@@ -1,17 +1,25 @@
-import {Component, ElementRef, HostListener} from '@angular/core';
-import {CartComponent} from '../cart/cart.component';
+import {Component, HostListener, OnInit} from '@angular/core';
+import { CartStorageService } from '../services/cart-storage.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
-  constructor() { }
+export class HeaderComponent implements OnInit {
+  constructor(private cartStorageService: CartStorageService) { }
 
-  isIn = false;
-  isInDropdown = false;
-  isCartOpen = false;
+  private isIn = false;
+  private isInDropdown = false;
+  private isCartOpen = false;
+  private amountProductsInCart: number;
+
+  ngOnInit() {
+    this.amountProductsInCart = JSON.parse(localStorage.getItem('cart')).length;
+    this.cartStorageService.watchStorage().subscribe(() => {
+      this.amountProductsInCart = JSON.parse(localStorage.getItem('cart')).length;
+    });
+  }
 
   toggleState() {
     this.isIn = !this.isIn;
@@ -36,5 +44,9 @@ export class HeaderComponent {
   changeCart(status: boolean) {
     this.isCartOpen = status;
     return false;
+  }
+
+  setCartAmount() {
+    this.amountProductsInCart = JSON.parse(localStorage.getItem('cart')).length;
   }
 }

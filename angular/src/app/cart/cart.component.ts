@@ -1,6 +1,7 @@
 import {Component, HostListener, Input, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
-import {Product} from "../product-list/product";
+import {Product} from '../product-list/product';
 import { Router } from '@angular/router';
+import { CartStorageService } from '../services/cart-storage.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit, OnChanges {
   private cartContent: Product[];
   private totalPrice = 0;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private cartStorageService: CartStorageService) { }
 
   ngOnInit() {
     this.updateCart();
@@ -38,12 +40,11 @@ export class CartComponent implements OnInit, OnChanges {
 
   deleteItem(id) {
     this.cartContent = this.cartContent.filter(e => e.id !== id);
-    //this.cartContent.splice(this.cartContent.indexOf(this.cartContent.find(x => x.id === id)), 1);
     this.updateStorage();
   }
 
   updateStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cartContent));
+    this.cartStorageService.setItem('cart', JSON.stringify(this.cartContent));
 
     if (!this.cartContent.length) {
       this.totalPrice = 0;

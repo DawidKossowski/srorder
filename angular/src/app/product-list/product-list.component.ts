@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
 import { ProductService } from './service/product.service';
+import { CartStorageService } from '../services/cart-storage.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +13,8 @@ export class ProductListComponent implements OnInit {
   private productsToCart: Array<Product>;
   private checked: boolean[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private cartStorageService: CartStorageService) { }
 
   ngOnInit() {
     this.productService.getProducts().then(products => this.products = products);
@@ -25,6 +27,7 @@ export class ProductListComponent implements OnInit {
       p.amount = 1;
       this.productsToCart.push(p);
       localStorage.setItem('cart', JSON.stringify(this.productsToCart));
+      this.cartStorageService.setItem('cart', JSON.stringify(this.productsToCart));
     } else {
       alert('This item is currently in cart.');
     }
