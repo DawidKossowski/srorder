@@ -1,6 +1,6 @@
 package hello.orders;
 
-import hello.Customer.Customer;
+import hello.User.User;
 
 import javax.persistence.*;
 
@@ -15,9 +15,9 @@ public class Orders {
 
     private Date date;
 
-   /* @OneToOne
-    @JoinColumn(name="customerId")
-    private Customer customer;*/
+    @OneToOne
+    @JoinColumn(name="userId")
+    private User user;
 
     public Integer getId() {
         return id;
@@ -35,11 +35,11 @@ public class Orders {
         this.date = date;
     }
 
-   /* public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }*/
+    public void setUser(User customer) {
+        this.user = customer;
+    }
 }

@@ -19,6 +19,8 @@ import { CartComponent } from './cart/cart.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { customerService } from "./customer/service/customer.service";
 import {CartStorageService} from "./services/cart-storage.service";
+import { RegisterComponent } from './User/register/register.component';
+import {UserService} from "./User/service/user.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import {CartStorageService} from "./services/cart-storage.service";
     OrderComponent,
     GoogleMapsComponent,
     CartComponent,
-    OrderConfirmationComponent
+    OrderConfirmationComponent,
+    RegisterComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -42,7 +45,7 @@ import {CartStorageService} from "./services/cart-storage.service";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService],
+  providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

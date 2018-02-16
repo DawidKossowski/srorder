@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,10 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
 
-import hello.products.Product;
 import hello.products.ProductRepository;
 
 @Controller    // This means that this class is a Controller
@@ -39,6 +35,7 @@ public class OrdersController {
     public @ResponseBody String createOrder(@RequestBody int[] products) {
         Orders o = new Orders();
         o.setDate(new Date());
+       // o.setCustomer(customer);
 
         ordersRepository.save(o);
 
@@ -49,8 +46,8 @@ public class OrdersController {
             order_product.setOrder(o);
             order_productRepository.save(order_product);
             LOG.info("new order crated");
-
         }
+
 
         return "Created";
     }

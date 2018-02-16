@@ -43,7 +43,7 @@ export class ProductListComponent implements OnInit {
   }
 
   // stare tworzenie zamowien, zostawiam dla wzoru
-  submitOrder() {
+  /*submitOrder() {
     const _idToSend: Array<Number> = [];
     const _productToCart: Array<Product> = [];
     this.checked.forEach((el, index) => {
@@ -57,5 +57,5 @@ export class ProductListComponent implements OnInit {
 
     this.productService.createOrder(_idToSend).catch();
     localStorage.setItem('cart', JSON.stringify(_productToCart));
-  }
+  }*/
 }
