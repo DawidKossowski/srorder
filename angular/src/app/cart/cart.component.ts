@@ -21,9 +21,6 @@ export class CartComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.updateCart();
-    this.cartContent.forEach( x => {
-      this.totalPrice += x.price * x.amount;
-    });
   }
 
   ngOnChanges() {
@@ -34,7 +31,7 @@ export class CartComponent implements OnInit, OnChanges {
   clickout(event) {
     //tu by mozna cos dac, zeby nie trzeba bylo dodawać kazdego kolejnego buttona do ignorowanych
     if (!( event.target.closest('.cart_content') || event.target.closest('.cartBtn') || event.target.closest('.deleteBtn') )) {
-      this.changeCartStatus.emit(false);
+      this.closeCart();
     }
   }
 
@@ -48,14 +45,22 @@ export class CartComponent implements OnInit, OnChanges {
 
     if (!this.cartContent.length) {
       this.totalPrice = 0;
+    } else {
+      this.cartContent.forEach( x => {
+        this.totalPrice += x.price * x.amount;
+      });
     }
-    this.cartContent.forEach( x => {
-      this.totalPrice += x.price * x.amount;
-    });
   }
 
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
+    if (!this.cartContent.length) {
+      this.totalPrice = 0;
+    } else {
+      this.cartContent.forEach( x => {
+        this.totalPrice += x.price * x.amount;
+      });
+    }
   }
 
   closeCart() {
