@@ -24,12 +24,13 @@ export class HeaderComponent implements OnInit {
     if(JSON.parse( localStorage.getItem('cart'))!= null) {
       this.amountProductsInCart = JSON.parse( localStorage.getItem('cart')).length;
     }
-
-    if( this.Username = ( JSON.parse( localStorage.getItem('currentUser')) as User ).name) {
-      this.isUserLogged = true;
-    }
-    else {
-      this.isUserLogged=false;
+    if(JSON.parse( localStorage.getItem('currentUser')) ){
+      if( this.Username = ( JSON.parse( localStorage.getItem('currentUser')) as User ).name) {
+        this.isUserLogged = true;
+      }
+      else {
+        this.isUserLogged=false;
+      }
     }
 
     this.cartStorageService.watchStorage().subscribe(() => {
@@ -39,12 +40,15 @@ export class HeaderComponent implements OnInit {
     });
 
     this.userStorageService.watchStorage().subscribe( () => {
-      console.log("user sub0");
-      if( this.Username = ( JSON.parse( localStorage.getItem('currentUser')) as User ).name) {
-        this.isUserLogged = true;
+
+      if(JSON.parse( localStorage.getItem('currentUser')) ){
+        if( this.Username = ( JSON.parse( localStorage.getItem('currentUser')) as User ).name) {
+          this.isUserLogged = true;
+        }
+        else {
+          this.isUserLogged=false;
+        }
       }
-      else
-        this.isUserLogged=false;
     });
   }
 
