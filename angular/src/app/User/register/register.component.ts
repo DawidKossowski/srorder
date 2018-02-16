@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../service/user.service';
 import {NgForm} from "@angular/forms";
 import {User} from "../User";
+import {UserStorageService} from "../../services/user-storage.service";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   public email: string;
   public password: string;
   public sex: string;
-  constructor( private userService: UserService) { }
+  constructor( private userService: UserService, private userStorageService: UserStorageService) { }
 
   ngOnInit() {
   }
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit {
     user.surname = this.surname;
     user.email = this.email;
     user.adress = this.placeId;
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.userStorageService.setItem('currentUser', JSON.stringify(user) );
+    //localStorage.setItem('currentUser', JSON.stringify(user));
     form.reset();
   }
 

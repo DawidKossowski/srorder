@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpModule } from '@angular/http';
 import { ProductService } from './product-list/service/product.service';
@@ -18,9 +18,11 @@ import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { customerService } from "./customer/service/customer.service";
-import {CartStorageService} from "./services/cart-storage.service";
+import { CartStorageService } from "./services/cart-storage.service";
 import { RegisterComponent } from './User/register/register.component';
-import {UserService} from "./User/service/user.service";
+import { UserService } from "./User/service/user.service";
+import { LoginComponent } from './User/login/login.component';
+import { UserStorageService } from "./services/user-storage.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {UserService} from "./User/service/user.service";
     GoogleMapsComponent,
     CartComponent,
     OrderConfirmationComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -45,7 +48,8 @@ import {UserService} from "./User/service/user.service";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService, UserService],
+  providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService,
+              UserService, UserStorageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

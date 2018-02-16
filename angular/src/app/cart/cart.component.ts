@@ -29,7 +29,6 @@ export class CartComponent implements OnInit, OnChanges {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    //tu by mozna cos dac, zeby nie trzeba bylo dodawać kazdego kolejnego buttona do ignorowanych
     if (!( event.target.closest('.cart_content') || event.target.closest('.cartBtn') || event.target.closest('.deleteBtn') )) {
       this.closeCart();
     }
@@ -54,6 +53,7 @@ export class CartComponent implements OnInit, OnChanges {
 
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
+
     if (!this.cartContent.length) {
       this.totalPrice = 0;
     } else {

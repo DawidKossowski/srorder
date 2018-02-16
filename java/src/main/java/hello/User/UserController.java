@@ -20,8 +20,6 @@ public class UserController {
     private User_AdressRepository user_adressRepository;
 
     @Autowired
-    private OrdersController ordersController;
-    @Autowired
     private AdressController adressController;
 
 

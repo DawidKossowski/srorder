@@ -42,6 +42,5 @@ export class OrderConfirmationComponent implements OnInit {
         _idToSend.push(x.id);
     }    )
     this.productService.createOrder(_idToSend).catch();
-    //tu przekleić cały order i od razu przypisanie customera do order
   }
 }
