@@ -26,7 +26,6 @@ export class OrderConfirmationComponent implements OnInit {
     if(user) {
       this.name = user.name;
       this.surname = user.surname;
-      this.placeId = user.adress; // to się oczywiście nie autouzupełnia, bo komponenty
     }
 
   }

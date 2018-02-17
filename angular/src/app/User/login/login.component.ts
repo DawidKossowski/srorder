@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {UserService} from "../service/user.service";
+
+import {UserStorageService} from "../../services/user-storage.service";
+import {User} from "../User";
+import {Router} from "@angular/router";
+import {Http} from "@angular/http";
+
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,14 +17,50 @@ import {UserService} from "../service/user.service";
 export class LoginComponent implements OnInit {
   public email: string;
   public password: string;
-  constructor(private userService: UserService) { }
+  constructor(private userStorageService: UserStorageService,
+              private router: Router,
+              private http: Http) { }
 
   ngOnInit() {
   }
 
   login(form: NgForm){
-    console.log(this.email, this.password);
-    this.userService.login(this.email, this.password);
 
+    this.http.get('/api/login', {params : {
+                                            email: this.email,
+                                            password: this.password } })
+      .toPromise()
+      .then(response => {
+        if (response.status === 200) {
+          this.userStorageService.setItem('currentUser', JSON.stringify(response.json() as User));
+          console.log(localStorage.getItem('currentUser'));
+          form.reset();
+          this.router.navigateByUrl('/list');
+        }else if(response.status === 404) {
+          alert("Wrong email");
+        } else if (response.status === 406) {
+          alert("wrong password");
+        } else {
+          alert("something went wrong");
+        }
+      }).catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+   // if chuj wie
+    console.log('An error occurred', error);
+    if(error.response)
+    {
+      if( error.response.body.status == 404 ) {
+        alert("Wrong email");
+      } else if (error.response.body.status ===406) {
+        alert("wrong password");
+      } else {
+        alert("something went wrong");
+      }
+    }
+
+    //console.log('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 }

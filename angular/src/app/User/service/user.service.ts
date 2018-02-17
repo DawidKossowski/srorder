@@ -26,6 +26,8 @@ export class UserService {
       .catch(this.handleError);
   }
 
+
+
   login( email: string, password: string) : Promise<string> {
     return this.http.get(this.loginUrl, {params: {email, password}}).toPromise()
       .then(response => {

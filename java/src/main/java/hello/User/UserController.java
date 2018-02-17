@@ -1,11 +1,13 @@
 package hello.User;
 
 
+import ch.qos.logback.core.joran.spi.ActionException;
 import hello.orders.OrdersController;
 import hello.products.ProductController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,10 +30,12 @@ public class UserController {
 
 
     @GetMapping(path="/registration")
-    public @ResponseBody String createNewUser(@RequestParam String name, @RequestParam String surname,
-                                               @RequestParam String sex, @RequestParam String email,
-                                               @RequestParam String password,
-                                               @RequestParam String adress) {
+    public @ResponseBody User createNewUser(@RequestParam String name,
+                                            @RequestParam String surname,
+                                            @RequestParam String sex,
+                                            @RequestParam String email,
+                                            @RequestParam String password,
+                                            @RequestParam String adress) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
@@ -49,20 +53,31 @@ public class UserController {
        user_adressRepository.save(user_adress);
 
 
-        return "new user created";
+        return user;
     }
 
     @GetMapping(path = "/login")
-    public @ResponseBody String login (@RequestParam String email, @RequestParam String password) {
-        Iterable<User> a = userRepository.findAll();
-        for (User u : a) {
-            if( email == u.getEmail() ) {
-                if(password == u.getPassword()) {
-                    return u.getId().toString();
+    public @ResponseBody User login (@RequestParam String email,
+                                     @RequestParam String password) throws ActionException {
+
+        for (User user : userRepository.findAll()) {
+            if( email.equals(user.getEmail())) {
+                if(password.equals(user.getPassword())) {
+                    LOG.info("successfull login");
+                    return user;
                 }
-                return "wrong password";
+                throw new WrongPasswordException();
             }
         }
-        return "wrong email";
+        throw new UserNotFoundException();
     }
+
+
+
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE, reason = "wrong password")
+    public static class WrongPasswordException extends RuntimeException {}
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "wrong email and password")
+    public class UserNotFoundException extends RuntimeException {}
+
 }
