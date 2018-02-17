@@ -93,10 +93,6 @@ export class HeaderComponent implements OnInit {
     this.amountProductsInCart = JSON.parse(localStorage.getItem('cart')).length;
   }
 
-  changeUserStatus(status: boolean) {
-    this.isUserLogged = status;
-  }
-
   Logout() {
     localStorage.removeItem('currentUser');
     window.location.reload();

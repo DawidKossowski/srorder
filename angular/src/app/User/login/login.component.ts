@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       }).catch(err => this.handleError(err));
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): any {
     if( error.status == 404 ) {
       alert("Wrong email");
     } else if (error.status === 406) {
@@ -50,6 +50,6 @@ export class LoginComponent implements OnInit {
       alert("something went wrong");
     }
 
-    return Promise.reject(error.message || error);
+    //return Promise.reject(error.message || error);
   }
 }
