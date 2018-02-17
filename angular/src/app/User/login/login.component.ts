@@ -31,36 +31,25 @@ export class LoginComponent implements OnInit {
                                             password: this.password } })
       .toPromise()
       .then(response => {
+        console.log(response.status);
         if (response.status === 200) {
           this.userStorageService.setItem('currentUser', JSON.stringify(response.json() as User));
           console.log(localStorage.getItem('currentUser'));
           form.reset();
           this.router.navigateByUrl('/list');
-        }else if(response.status === 404) {
-          alert("Wrong email");
-        } else if (response.status === 406) {
-          alert("wrong password");
-        } else {
-          alert("something went wrong");
         }
-      }).catch(this.handleError);
+      }).catch(err => this.handleError(err));
   }
 
   private handleError(error: any): Promise<any> {
-   // if chuj wie
-    console.log('An error occurred', error);
-    if(error.response)
-    {
-      if( error.response.body.status == 404 ) {
-        alert("Wrong email");
-      } else if (error.response.body.status ===406) {
-        alert("wrong password");
-      } else {
-        alert("something went wrong");
-      }
+    if( error.status == 404 ) {
+      alert("Wrong email");
+    } else if (error.status === 406) {
+      alert("wrong password");
+    } else {
+      alert("something went wrong");
     }
 
-    //console.log('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }
