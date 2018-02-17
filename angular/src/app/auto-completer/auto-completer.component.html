@@ -1,0 +1,19 @@
+
+<input type="text" class="form-control"
+       [id]="inputId"
+       [(ngModel)]="val"
+       (ngModelChange)="filter()"
+       (keydown)="onPressKey($event)"
+       [appMyFocus]="focusedIdx === -1"/>
+
+<div class="autocomplete-wrapper">
+  <div class="autocomplete" tabindex="-1"
+       *ngFor="let result of results; let idx=index"
+       [appMyFocus]="focusedIdx === idx"
+       (keydown)="onPressKey($event)"
+       (click)="mouseClick($event.target.innerText)">
+    <button> {{result}} </button>
+  </div>
+</div>
+
+

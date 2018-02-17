@@ -1,0 +1,9 @@
+<form #addProductFrom="ngForm">
+  <div class="form-group">
+    <label for="searchProduct">Search product: </label>
+    <app-auto-completer
+      [inputId]="'searchProduct'"
+      [arrayToFilter]="productsName"
+      (sendResult)="getResult($event)"></app-auto-completer>
+  </div>
+</form>

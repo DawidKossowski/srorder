@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       }).catch(err => this.handleError(err));
   }
 
-  private handleError(error: any): any {
+  private handleError(error: any): void {
     if( error.status == 404 ) {
       alert("Wrong email");
     } else if (error.status === 406) {

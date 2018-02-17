@@ -1,3 +1,9 @@
+<app-product-filter
+  [productsName]="productsName"
+  (filterResult)="getFilterResult($event)"></app-product-filter>
+
+<br/>
+
 <table class="table table-striped">
   <thead>
   <tr>
@@ -8,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let product of products">
+  <tr *ngFor="let product of productsToShow">
     <td>{{product.id}}</td>
     <td>{{product.name}}</td>
     <td>{{product.price}}</td>

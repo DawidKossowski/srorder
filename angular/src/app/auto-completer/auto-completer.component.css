@@ -1,0 +1,26 @@
+.autocomplete-wrapper {
+  position: absolute;
+  width: 160px;
+}
+
+.autocomplete {
+  border: 1px solid gray;
+  margin-bottom: -1px;
+  padding: 5px;
+  background: white;
+}
+
+.autocomplete:hover {
+  cursor: pointer;
+}
+
+.autocomplete:focus, .autocomplete:hover {
+  background: whitesmoke;
+}
+
+.autocomplete button {
+  border: none;
+  background: transparent;
+  text-decoration: none;
+  color: black;
+}

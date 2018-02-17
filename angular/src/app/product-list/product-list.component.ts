@@ -10,14 +10,20 @@ import { CartStorageService } from '../services/cart-storage.service';
 })
 export class ProductListComponent implements OnInit {
   private products: Array<Product>;
+  private productsToShow: Array<Product>;
   private productsToCart: Array<Product>;
-  private checked: boolean[] = [];
+  private productsName: Array<string> = [];
 
   constructor(private productService: ProductService,
               private cartStorageService: CartStorageService) { }
 
   ngOnInit() {
-    this.productService.getProducts().then(products => this.products = products);
+    this.productService.getProducts().then(products => {
+      this.products = products;
+      this.productsToShow = this.products;
+      products.filter(p => this.productsName.push(p.name));
+    });
+
   }
 
   addToCart(id: number) {
@@ -32,6 +38,13 @@ export class ProductListComponent implements OnInit {
       } else {
         alert('This item is currently in cart.');
       }
+  }
 
+  getFilterResult(result: string) {
+    if(result) {
+      this.productsToShow = this.products.filter(p => p.name === result);
+    } else {
+      this.productsToShow = this.products;
+    }
   }
 }

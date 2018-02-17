@@ -23,6 +23,9 @@ import { RegisterComponent } from './User/register/register.component';
 import { UserService } from "./User/service/user.service";
 import { LoginComponent } from './User/login/login.component';
 import { UserStorageService } from "./services/user-storage.service";
+import { AutoCompleterComponent } from './auto-completer/auto-completer.component';
+import { ProductFilterComponent } from './product-list/product-filter/product-filter.component';
+import { MyFocusDirective } from './directives/my-focus.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { UserStorageService } from "./services/user-storage.service";
     CartComponent,
     OrderConfirmationComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AutoCompleterComponent,
+    ProductFilterComponent,
+    MyFocusDirective
   ],
   imports: [
     AgmCoreModule.forRoot({
