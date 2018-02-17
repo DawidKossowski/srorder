@@ -39,5 +39,16 @@ public class AdressController {
 
     }
 
+    @RequestMapping(path = "/getAdress")
+    public @ResponseBody Adress getAdress(@RequestParam Integer id) {
+        for (Adress a :adressRepository.findAll()) {
+            if(a.getId() == id) {
+
+                return a;
+            }
+        }
+        return null;
+    }
+
 
 }

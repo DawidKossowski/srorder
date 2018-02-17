@@ -20,7 +20,6 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { customerService } from "./customer/service/customer.service";
 import { CartStorageService } from "./services/cart-storage.service";
 import { RegisterComponent } from './User/register/register.component';
-import { UserService } from "./User/service/user.service";
 import { LoginComponent } from './User/login/login.component';
 import { UserStorageService } from "./services/user-storage.service";
 import { AutoCompleterComponent } from './auto-completer/auto-completer.component';
@@ -55,7 +54,7 @@ import { MyFocusDirective } from './directives/my-focus.directive';
     AppRoutingModule
   ],
   providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService,
-              UserService, UserStorageService ],
+              UserStorageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import {NgForm} from '@angular/forms';
 import {Product} from "../product-list/product";
 import {ProductService} from "../product-list/service/product.service";
 import {User} from "../User/User";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-order-confirmation',
@@ -17,7 +18,8 @@ export class OrderConfirmationComponent implements OnInit {
   public products: Product[];
 
   constructor(private customerService: customerService,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              private http: Http) { }
 
   ngOnInit() {
     this.products = JSON.parse(localStorage.getItem('cart'));
@@ -26,7 +28,20 @@ export class OrderConfirmationComponent implements OnInit {
     if(user) {
       this.name = user.name;
       this.surname = user.surname;
+
+    /*  this.http.get('/api/getUsersAdress', {params: {userId: user.id}})
+        .toPromise()
+        .then( response => {
+        this.placeId = response.json().adress;
+        this.setPlaceId(response.json().adress);
+        console.log( this.placeId);
+        console.log(response.json());
+      }).catch() //to jakby zrobić jeszcze komunikację, zeby domyślnie był adres podany przy erjestracji
+
+
+      ,*/
     }
+
 
   }
 

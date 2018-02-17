@@ -80,4 +80,20 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "wrong email and password")
     public class UserNotFoundException extends RuntimeException {}
 
+    @GetMapping (path= "/getUsersAdress")
+    public @ResponseBody Adress getUsersAdress( @RequestParam Integer userId) {
+        LOG.info(userId + "a");
+        for (User_Adress useradress: user_adressRepository.findAll()
+             ) {
+            if(useradress.getUser().getId().equals(userId)) {
+                LOG.info(useradress.getAdress().getAdress());
+                LOG.info(useradress.getAdress().getId() + "a");
+
+                return useradress.getAdress();
+            }
+        }
+
+        return null;
+    }
+
 }
