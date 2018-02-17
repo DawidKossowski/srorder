@@ -34,30 +34,28 @@
           </a>
         </li>
 
-
-          <li *ngIf="isUserLogged; else elseBlock" class=" dropdown" [ngClass]="{'open': isUserMenuInDropdownInDropdown}" >
+          <li *ngIf="isUserLogged; else elseBlock" class=" dropdown"
+              [ngClass]="{'open': isUserMenuInDropdown}" >
             <a href="#" (click)="toggleStateDropdownUserMenu($event)" class="Userdropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
               Hi, {{Username}}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
               <li><a routerLink="/">My account</a></li>
-              <li><a routerLink="/">Logout</a></li>
+              <li><a routerLink="/list" (click)="Logout()">Logout</a></li>
             </ul>
           </li>
 
-
-        <ng-template #elseBlock>
-          <li>
-            <a routerLink="/list">Login</a>
-          </li>
-          <li>
-            <a routerLink="/register">Register</a>
-          </li>
-        </ng-template>
+          <ng-template #elseBlock>
+            <li>
+              <a routerLink="/login">Login</a>
+            </li>
+            <li>
+              <a routerLink="/register">Register</a>
+            </li>
+          </ng-template>
 
       </ul>
-
     </div>
   </div>
 </nav>

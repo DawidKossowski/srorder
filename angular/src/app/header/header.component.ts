@@ -96,4 +96,9 @@ export class HeaderComponent implements OnInit {
   changeUserStatus(status: boolean) {
     this.isUserLogged = status;
   }
+
+  Logout() {
+    localStorage.removeItem('currentUser');
+    window.location.reload();
+  }
 }

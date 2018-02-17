@@ -15,6 +15,7 @@ export class UserStorageService {
     localStorage.setItem(key, data);
     this.storageSub.next();
   }
+
   removeItem(key) {
     localStorage.removeItem(key);
     this.storageSub.next();

@@ -51,4 +51,18 @@ public class UserController {
 
         return "new user created";
     }
+
+    @GetMapping(path = "/login")
+    public @ResponseBody String login (@RequestParam String email, @RequestParam String password) {
+        Iterable<User> a = userRepository.findAll();
+        for (User u : a) {
+            if( email == u.getEmail() ) {
+                if(password == u.getPassword()) {
+                    return u.getId().toString();
+                }
+                return "wrong password";
+            }
+        }
+        return "wrong email";
+    }
 }

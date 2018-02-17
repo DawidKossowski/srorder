@@ -6,6 +6,7 @@ import { OrderComponent } from './order/order.component';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { OrderConfirmationComponent } from "./order-confirmation/order-confirmation.component";
 import {RegisterComponent} from "./User/register/register.component";
+import {LoginComponent} from "./User/login/login.component";
 
 const routes: Routes = [
   { path: 'list', component: ProductListComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'orders', component: OrderComponent },
   { path: 'map', component: GoogleMapsComponent},
   { path: 'orderConfirmation', component: OrderConfirmationComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

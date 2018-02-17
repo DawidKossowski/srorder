@@ -9,7 +9,8 @@ export class UserService {
 
   }
 
-  private registerUrl = '/api/registration'
+  private registerUrl = '/api/registration';
+  private loginUrl = '/api/login';
 
   registerUser( sex: string, name: string, surname: string,
                 email: string, password: string, adress: string): Promise<string> {
@@ -23,6 +24,20 @@ export class UserService {
         }
       })
       .catch(this.handleError);
+  }
+
+  login( email: string, password: string) : Promise<string> {
+    return this.http.get(this.loginUrl, {params: {email, password}}).toPromise()
+      .then(response => {
+        console.log(response);
+        if (response.status === 200) {
+          alert(response.text());
+        } else {
+          alert('Error');
+        }
+      })
+      .catch(this.handleError);
+
   }
 
   private handleError(error: any): Promise<any> {
