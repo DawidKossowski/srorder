@@ -23,7 +23,6 @@ export class ProductListComponent implements OnInit {
       this.productsToShow = this.products;
       products.filter(p => this.productsName.push(p.name));
     });
-
   }
 
   addToCart(id: number) {

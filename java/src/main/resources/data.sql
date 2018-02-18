@@ -4,7 +4,7 @@ INSERT INTO `product` (name, price, amount) VALUES ('piguly', 666, 69);
 INSERT INTO `product` (name, price, amount) VALUES ('kielbassa', 32, 0);
 
 
-INSERT INTO `adress` (adress) VALUE ('ChIJTfDDb82e4jARBGCJMk2jOL4');
+INSERT INTO `adress` (adress) VALUE ('ChIJi0FfadA0GkcRGMY5IrGRwvs');
 INSERT INTO `adress` (adress) VALUE ('EiZBbGVqZSBKZXJvem9saW1za2llLCBQcnVzemvDs3csIFBvbHNrYQ');
 
 

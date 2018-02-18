@@ -27,6 +27,7 @@ import { ProductFilterComponent } from './product-list/product-filter/product-fi
 import { MyFocusDirective } from './directives/my-focus.directive';
 import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
 import { MapComponent } from './google-maps-2/map/map.component';
+import {UserAdressService} from "./services/user-adress.service";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { MapComponent } from './google-maps-2/map/map.component';
     AppRoutingModule
   ],
   providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService,
-              UserStorageService ],
+              UserStorageService, UserAdressService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
