@@ -42,8 +42,8 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         user.setPassword(password);
-
-       userRepository.save(user);
+       // user.setAdress(adressController.creareAdress(adress));
+        userRepository.save(user);
 
 
        User_Adress user_adress = new User_Adress();

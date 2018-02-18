@@ -18,10 +18,24 @@ public class User {
     private String password;
 
     private String sex;
+    
+    @OneToOne
+    @JoinColumn(name="deafultAdress")
+    private Adress adress;
+
+    public Adress getAdress() {
+        return adress;
+    }
+
+    public void setAdress(Adress adress) {
+        this.adress = adress;
+    }
 
     public String getSex() {
+
         return sex;
     }
+
 
     public void setSex(String sex) {
         this.sex = sex;
