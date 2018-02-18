@@ -5,6 +5,7 @@ import {Product} from "../product-list/product";
 import {ProductService} from "../product-list/service/product.service";
 import {User} from "../User/User";
 import {Http} from "@angular/http";
+import { } from 'googlemaps';
 
 @Component({
   selector: 'app-order-confirmation',
@@ -28,6 +29,11 @@ export class OrderConfirmationComponent implements OnInit {
     if(user) {
       this.name = user.name;
       this.surname = user.surname;
+
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'placeId': 'ChIJTfDDb82e4jARBGCJMk2jOL4'}, function(results, status) {
+        console.log(results);
+      });
 
     /*  this.http.get('/api/getUsersAdress', {params: {userId: user.id}})
         .toPromise()
@@ -56,5 +62,10 @@ export class OrderConfirmationComponent implements OnInit {
         _idToSend.push(x.id);
     }    )
     this.productService.createOrder(_idToSend).catch();
+  }
+
+
+  test() {
+
   }
 }

@@ -1,6 +1,6 @@
 package hello.User;
 
-
+import java.util.*;
 import ch.qos.logback.core.joran.spi.ActionException;
 import hello.orders.OrdersController;
 import hello.products.ProductController;
@@ -81,19 +81,19 @@ public class UserController {
     public class UserNotFoundException extends RuntimeException {}
 
     @GetMapping (path= "/getUsersAdress")
-    public @ResponseBody Adress getUsersAdress( @RequestParam Integer userId) {
-        LOG.info(userId + "a");
+    public @ResponseBody List<Adress> getUsersAdress( @RequestParam Integer userId) {
+        List<Adress> addresses = new ArrayList<Adress>();
         for (User_Adress useradress: user_adressRepository.findAll()
              ) {
             if(useradress.getUser().getId().equals(userId)) {
                 LOG.info(useradress.getAdress().getAdress());
                 LOG.info(useradress.getAdress().getId() + "a");
 
-                return useradress.getAdress();
+                addresses.add(useradress.getAdress());
             }
         }
 
-        return null;
+        return addresses;
     }
 
 }
