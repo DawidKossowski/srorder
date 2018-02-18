@@ -25,6 +25,7 @@ import { UserStorageService } from "./services/user-storage.service";
 import { AutoCompleterComponent } from './auto-completer/auto-completer.component';
 import { ProductFilterComponent } from './product-list/product-filter/product-filter.component';
 import { MyFocusDirective } from './directives/my-focus.directive';
+import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MyFocusDirective } from './directives/my-focus.directive';
     LoginComponent,
     AutoCompleterComponent,
     ProductFilterComponent,
-    MyFocusDirective
+    MyFocusDirective,
+    GoogleMaps2Component
   ],
   imports: [
     AgmCoreModule.forRoot({
