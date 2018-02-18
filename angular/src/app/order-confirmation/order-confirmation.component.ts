@@ -5,6 +5,9 @@ import {Product} from "../product-list/product";
 import {ProductService} from "../product-list/service/product.service";
 import {User} from "../User/User";
 import {Http} from "@angular/http";
+import { } from 'googlemaps';
+import { MapsAPILoader } from '@agm/core';
+
 
 @Component({
   selector: 'app-order-confirmation',
@@ -19,7 +22,7 @@ export class OrderConfirmationComponent implements OnInit {
 
   constructor(private customerService: customerService,
               private productService: ProductService,
-              private http: Http) { }
+              private http: Http) {}
 
   ngOnInit() {
     this.products = JSON.parse(localStorage.getItem('cart'));
@@ -29,20 +32,40 @@ export class OrderConfirmationComponent implements OnInit {
       this.name = user.name;
       this.surname = user.surname;
 
-    /*  this.http.get('/api/getUsersAdress', {params: {userId: user.id}})
+
+
+     this.http.get('/api/getUsersAdress', {params: {userId: user.id}})
         .toPromise()
         .then( response => {
-        this.placeId = response.json().adress;
-        this.setPlaceId(response.json().adress);
-        console.log( this.placeId);
-        console.log(response.json());
-      }).catch() //to jakby zrobić jeszcze komunikację, zeby domyślnie był adres podany przy erjestracji
+          this.placeId = response.json().adress;
+          this.setPlaceId(response.json().adress);
+          console.log(this.placeId);
+          console.log(response.json());
+
+          var geocoder = new google.maps.Geocoder();
 
 
-      ,*/
+          geocoder.geocode({'placeId': response.json().adress}, function (results, status) {
+            console.log(results);
+          });
+        }).catch(err => this.handleError(err));
+
+
+
+
+
+  }}
+
+  private handleError(error: any): void {
+    if( error.status == 404 ) {
+      alert("Wrong email");
+    } else if (error.status === 406) {
+      alert("wrong password");
+    } else {
+      alert(error.message);
     }
 
-
+    //return Promise.reject(error.message || error);
   }
 
   setPlaceId(id: string) {
