@@ -45,7 +45,10 @@ export class OrderConfirmationComponent implements OnInit {
 
       ,*/
     }
-
+    this.http.get('/api/getDefaultAdress', {params: {userId: user.id}})
+      .toPromise().then( response => {
+        console.log(response);
+    }).catch();
 
   }
 

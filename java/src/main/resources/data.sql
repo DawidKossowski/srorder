@@ -9,9 +9,8 @@ INSERT INTO `adress` (adress) VALUE ('EiZBbGVqZSBKZXJvem9saW1za2llLCBQcnVzemvDs3
 
 
 
-INSERT INTO `user` (sex, name, surname, email, password, deafultAdress) VALUES
-  ('male', 'Adam', 'Malysz', 'adam.malysz@gmail.com', 'bananbulka', 'ChIJT_5Sy6i3G0cRW9gYc7iBwdE');
-
+INSERT INTO user (sex, name, surname, email, password, deafult_adress) VALUES
+  ('male', 'Adam', 'Malysz', 'adam.malysz@gmail.com', 'bananbulka', 1);
 
 INSERT INTO `user_adress` (adress_id, user_id) VALUES (2, 1);
 INSERT INTO `user_adress` (adress_id, user_id) VALUES (1, 1);

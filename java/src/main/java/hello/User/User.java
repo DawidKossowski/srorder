@@ -18,7 +18,7 @@ public class User {
     private String password;
 
     private String sex;
-    
+
     @OneToOne
     @JoinColumn(name="deafultAdress")
     private Adress adress;

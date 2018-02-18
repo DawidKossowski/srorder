@@ -42,16 +42,16 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         user.setPassword(password);
-       // user.setAdress(adressController.creareAdress(adress));
+        user.setAdress(adressController.creareAdress(adress));
         userRepository.save(user);
 
 
-       User_Adress user_adress = new User_Adress();
+      /* User_Adress user_adress = new User_Adress();
        user_adress.setAdress(adressController.creareAdress(adress));
        user_adress.setUser(user);
 
        user_adressRepository.save(user_adress);
-
+*/
 
         return user;
     }
@@ -94,6 +94,11 @@ public class UserController {
         }
 
         return addresses;
+    }
+
+    @GetMapping (path = "/getDefaultAdress")
+    public @ResponseBody String getDefaultAdress( @RequestParam Integer userId) {
+      return userRepository.findUserByIntegerId(userId).getAdress().getAdress();
     }
 
 }
