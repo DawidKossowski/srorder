@@ -26,6 +26,7 @@ import { AutoCompleterComponent } from './auto-completer/auto-completer.componen
 import { ProductFilterComponent } from './product-list/product-filter/product-filter.component';
 import { MyFocusDirective } from './directives/my-focus.directive';
 import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
+import { MapComponent } from './google-maps-2/map/map.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
     AutoCompleterComponent,
     ProductFilterComponent,
     MyFocusDirective,
-    GoogleMaps2Component
+    GoogleMaps2Component,
+    MapComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
