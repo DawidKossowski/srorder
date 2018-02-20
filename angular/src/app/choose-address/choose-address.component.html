@@ -1,0 +1,11 @@
+<form name="myForm" ng-controller="ExampleController">
+<div *ngFor="let adress of adresses">
+  <label>
+    <input type="radio" name = {{adress}} [(ngModel)]="chosen" value ={{adress}} >
+    {{adress}}
+  </label><br/>
+
+
+</div>
+</form>
+<div> wybrane = {{chosen}}</div>

@@ -19,6 +19,8 @@ export class OrderConfirmationComponent implements OnInit {
   public defaultAdress;
   public products: Product[];
 
+  public fullAdress: string;
+
   constructor(private customerService: customerService,
               private productService: ProductService,
               private userAdressService: UserAdressService,
@@ -34,11 +36,17 @@ export class OrderConfirmationComponent implements OnInit {
       this.surname = user.surname;
     }
 
-    this.userAdressService.getUserAdress(user.id).then(e => this.defaultAdress = e);
+    this.userAdressService.getUserAdress(user.id).then(e => {
+      this.defaultAdress = e;
+      this.placeId = this.defaultAdress[0].formatted_address;
+      this.fullAdress = this.name + " " + this.surname + this.placeId;
+    });
+
   }
 
   test() {
     console.log(this.defaultAdress);
+    this.placeId = this.defaultAdress[0].formatted_address;
   }
 
   setPlaceId(id: string) {

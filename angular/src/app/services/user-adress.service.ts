@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import GeocoderResult = google.maps.GeocoderResult;
+
 
 @Injectable()
 export class UserAdressService {
@@ -10,6 +12,7 @@ export class UserAdressService {
 
   private geocoder = new google.maps.Geocoder();
   private defaultAdressUrl = '/api/getDefaultAdress';
+  private allUsersAddressUrl = 'api/getUsersAdress'
 
   getPlaceIdByUserId(id: number) {
     return this.http.get(this.defaultAdressUrl, { params: { userId: id } })
@@ -26,5 +29,30 @@ export class UserAdressService {
       });
     });
   }
+
+  deliverAllUserAdress(id: number) {
+    return this.http.get(this.allUsersAddressUrl, {params: {userId: id}})
+      .toPromise()
+      .then();
+
+  }
+
+  getAllUserAdress(id: number) {
+    return new Promise(resolve => {
+      this.deliverAllUserAdress(id).then(response => {
+      //  console.log(response);
+
+        response.json().forEach( item => {
+
+          this.geocoder.geocode({'placeId': item.adress }, function(results, status) {
+            resolve(results);
+
+          });
+
+          });
+        });
+      });
+    }
+
 
 }

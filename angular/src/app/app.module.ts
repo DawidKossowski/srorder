@@ -28,6 +28,7 @@ import { MyFocusDirective } from './directives/my-focus.directive';
 import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
 import { MapComponent } from './google-maps-2/map/map.component';
 import {UserAdressService} from "./services/user-adress.service";
+import { ChooseAddressComponent } from './choose-address/choose-address.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {UserAdressService} from "./services/user-adress.service";
     ProductFilterComponent,
     MyFocusDirective,
     GoogleMaps2Component,
-    MapComponent
+    MapComponent,
+    ChooseAddressComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
