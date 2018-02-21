@@ -56,22 +56,13 @@ export class CartComponent implements OnInit, OnChanges {
 
   updateStorage() {
     this.cartStorageService.setItem('cart', JSON.stringify(this.cartContent));
-
-    if (!this.cartContent) {
-      this.totalPrice = 0;
-    } else {
-      this.cartContent.forEach( x => {
-        this.totalPrice += x.price * x.amount;
-      });
-    }
+    this.updateCart();
   }
 
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
-
-    if (!this.cartContent) {
-      this.totalPrice = 0;
-    } else {
+    this.totalPrice = 0;
+    if (this.cartContent) {
       this.cartContent.forEach( x => {
         this.totalPrice += x.price * x.amount;
       });

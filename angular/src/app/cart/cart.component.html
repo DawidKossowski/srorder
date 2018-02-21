@@ -12,7 +12,7 @@
       <div class="cart_item" [id] = elem.id>
         <div class="item_name"> {{elem.name}} </div>
         <div class="item_data">
-          <input [(ngModel)]="elem.amount" class="item_amount" type="number" (change) = "updateStorage()"/>
+          <input [(ngModel)]="elem.amount" class="item_amount" type="number" min="0" (change) = "updateStorage()"/>
           <div class="item_price">x {{elem.price}}zł</div>
         </div>
         <button class="deleteBtn cart_btn" type="button" (click) = "deleteItem(elem.id)"> Delete </button>
