@@ -2,7 +2,6 @@ package hello.User;
 
 import java.util.*;
 import ch.qos.logback.core.joran.spi.ActionException;
-import hello.orders.OrdersController;
 import hello.products.ProductController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,16 +41,8 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAddress(addressController.creareAddress(address, name, surname));
+        user.setAddress(addressController.createAddress(address, name, surname));
         userRepository.save(user);
-
-
-      /* User_Address user_address = new User_Address();
-       user_address.setAddress(addressController.creareAddress(address));
-       user_address.setUser(user);
-
-       user_addressRepository.save(user_address);
-*/
 
         return user;
     }
@@ -80,15 +71,14 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "wrong email and password")
     public class UserNotFoundException extends RuntimeException {}
 
+
+
     @GetMapping (path= "/getUsersAddress")
     public @ResponseBody List<Address> getUsersAddress( @RequestParam Integer userId) {
         List<Address> addresses = new ArrayList<Address>();
         for (User_Address useraddress: user_addressRepository.findAll()
              ) {
             if(useraddress.getUser().getId().equals(userId)) {
-                LOG.info(useraddress.getAddress().getAddress());
-                LOG.info(useraddress.getAddress().getId() + "a");
-
                 addresses.add(useraddress.getAddress());
             }
         }
@@ -99,6 +89,11 @@ public class UserController {
     @GetMapping (path = "/getDefaultAddress")
     public @ResponseBody String getDefaultAddress( @RequestParam Integer userId) {
       return userRepository.findUserByIntegerId(userId).getAddress().getAddress();
+    }
+
+    @GetMapping (path = "/getUser")
+    public @ResponseBody User getUserById( @RequestParam Integer userId) {
+        return userRepository.findUserByIntegerId(userId);
     }
 
 }

@@ -20,7 +20,7 @@ public class AddressController {
     private static final Logger LOG = LoggerFactory.getLogger(OrdersController.class);
 
     @RequestMapping(path= "/createAddress")
-    public @ResponseBody Address creareAddress(@RequestParam String placeId, @RequestParam String name, @RequestParam String surname ) {
+    public @ResponseBody Address createAddress(@RequestParam String placeId, @RequestParam String name, @RequestParam String surname ) {
 
         for (Address a :addressRepository.findAll()) {
             if(a.getAddress() == placeId) {

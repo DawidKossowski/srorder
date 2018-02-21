@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { User } from '../User/User';
 import {UserAddressService} from "../services/user-address.service";
-import {customerService} from "../customer/service/customer.service";
 
 @Component({
   selector: 'app-choose-address',
@@ -10,7 +9,6 @@ import {customerService} from "../customer/service/customer.service";
 })
 export class ChooseAddressComponent implements OnInit {
 
-  public addresses: string[] = ['zgierz', 'lodz', 'wwa'];
   public chosen = -1;
   public name: string;
   public surname: string;
@@ -19,11 +17,10 @@ export class ChooseAddressComponent implements OnInit {
   public showAllAddress = false;
   @Output() id = new EventEmitter<number>();
 
-  constructor(private userAddressService: UserAddressService,
-              private customerService: customerService) { }
+  constructor(private userAddressService: UserAddressService) { }
 
   ngOnInit() {
-    let user: User = new User();
+    let user: User;
     user = JSON.parse(localStorage.getItem('currentUser'));
 
     if(user) {

@@ -17,7 +17,6 @@ import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
-import { customerService } from "./customer/service/customer.service";
 import { CartStorageService } from "./services/cart-storage.service";
 import { RegisterComponent } from './User/register/register.component';
 import { LoginComponent } from './User/login/login.component';
@@ -60,7 +59,7 @@ import { ChooseAddressComponent } from './choose-address/choose-address.componen
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService,
+  providers: [ProductService, NewProductService, OrderService, CartStorageService,
               UserStorageService, UserAddressService ],
   bootstrap: [AppComponent]
 })

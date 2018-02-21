@@ -22,13 +22,12 @@ export class ProductService {
       .catch(this.handleError);
   }
 
-  createOrder(productsId: Array<Number>, name: string, surname: string ): Promise<string> {
+  createOrder(productsId: Array<Number>, userId: number, addressId: number ): Promise<string> {
     const parameters = {
-      'name': name,
-      'surname': surname,
+      'userId': userId,
+      'addressId': addressId,
       'productsIds': productsId
     };
-
     return this.http.post(this.orderUrl, parameters)
       .toPromise()
       .then()
