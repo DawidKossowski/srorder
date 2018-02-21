@@ -6,22 +6,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Adress {
+public class Address {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    String adress;
+    String address;
 
     public Integer getId() {
         return id;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 }

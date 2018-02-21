@@ -11,9 +11,9 @@ export class customerService {
 
   private createUrl = '/api/createCustomer';
 
-  createCustomer(name: string, surname: string, adress: string): Promise<string> {
+  createCustomer(name: string, surname: string, address: string): Promise<string> {
     return this.http.get(this.createUrl,
-      {params: { name: name, surname: surname, adress: adress } } )
+      {params: { name: name, surname: surname, address: address } } )
       .toPromise().then().catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {

@@ -20,15 +20,15 @@ public class User {
     private String sex;
 
     @OneToOne
-    @JoinColumn(name="deafultAdress")
-    private Adress adress;
+    @JoinColumn(name="deafultAddress")
+    private Address address;
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getSex() {

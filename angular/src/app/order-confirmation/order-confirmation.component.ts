@@ -5,7 +5,7 @@ import {Product} from "../product-list/product";
 import {ProductService} from "../product-list/service/product.service";
 import {User} from "../User/User";
 import {Http} from "@angular/http";
-import {UserAdressService} from "../services/user-adress.service";
+import {UserAddressService} from "../services/user-address.service";
 
 @Component({
   selector: 'app-order-confirmation',
@@ -19,11 +19,11 @@ export class OrderConfirmationComponent implements OnInit {
   public products: Product[];
   public user: User;
 
-  public fullAdress: string;
+  public fullAddress: string;
 
   constructor(private customerService: customerService,
               private productService: ProductService,
-              private userAdressService: UserAdressService,
+              private userAddressService: UserAddressService,
               private http: Http) {}
 
   ngOnInit() {
@@ -31,7 +31,9 @@ export class OrderConfirmationComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
+  submitOrder() {
 
+  }
   SubmitOrder() {
     this.customerService.createCustomer(this.name, this.surname, this.placeId).catch();
     const _idToSend: Array<Number> = [];
@@ -41,11 +43,7 @@ export class OrderConfirmationComponent implements OnInit {
     this.productService.createOrder(_idToSend).catch();
   }
 
-  test() {
-    console.log(this.user.adress.id);
-  }
-
   getNewAddressId(number: number) {
-    this.user.adress.id = number;
+    this.user.address.id = number;
   }
 }

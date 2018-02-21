@@ -2,7 +2,7 @@
   <label class="address-btn">
     <input *ngIf="showAllAddress" [checked]="chosen == -1" type="radio" name="address" value ="-1" >
   </label>
-  <div *ngIf="defaultAdress">
+  <div *ngIf="defaultAddress">
     <div class="row address">
       <div class="col-md-4 address-description">
         <p>Name: </p>
@@ -25,7 +25,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{defaultAdress[0].address_components[1].long_name}} {{defaultAdress[0].address_components[0].long_name}}
+          {{defaultAddress[0].address_components[1].long_name}} {{defaultAddress[0].address_components[0].long_name}}
         </p>
       </div>
     </div>
@@ -35,7 +35,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{defaultAdress[0].address_components[3].long_name}}
+          {{defaultAddress[0].address_components[3].long_name}}
         </p>
       </div>
     </div>
@@ -45,7 +45,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{defaultAdress[0].address_components[5].long_name}}
+          {{defaultAddress[0].address_components[5].long_name}}
         </p>
       </div>
     </div>
@@ -55,7 +55,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{defaultAdress[0].address_components[6].long_name}}
+          {{defaultAddress[0].address_components[6].long_name}}
         </p>
       </div>
     </div>
@@ -64,7 +64,7 @@
 
 
 <ng-container *ngFor="let address of allAddress">
-  <div class="address-wrapper" *ngIf="defaultAdress && showAllAddress" [ngClass] = " {'selected' : (chosen == address.id) }" (click)="choose(address.id)">
+  <div class="address-wrapper" *ngIf="defaultAddress && showAllAddress" [ngClass] = " {'selected' : (chosen == address.id) }" (click)="choose(address.id)">
     <label class="address-btn">
       <input *ngIf="showAllAddress" [checked]="chosen === address.id" type="radio" name="address"  value ={{address.id}} (click)="test()" >
     </label>
@@ -90,7 +90,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{address.adress[0].address_components[1].long_name}} {{address.adress[0].address_components[0].long_name}}
+          {{address.address[0].address_components[1].long_name}} {{address.address[0].address_components[0].long_name}}
         </p>
       </div>
     </div>
@@ -100,7 +100,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{address.adress[0].address_components[3].long_name}}
+          {{address.address[0].address_components[3].long_name}}
         </p>
       </div>
     </div>
@@ -110,7 +110,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{address.adress[0].address_components[5].long_name}}
+          {{address.address[0].address_components[5].long_name}}
         </p>
       </div>
     </div>
@@ -120,7 +120,7 @@
       </div>
       <div class="col-md-8">
         <p>
-          {{address.adress[0].address_components[6].long_name}}
+          {{address.address[0].address_components[6].long_name}}
         </p>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { User } from '../User/User';
-import {UserAdressService} from "../services/user-adress.service";
+import {UserAddressService} from "../services/user-address.service";
 import {customerService} from "../customer/service/customer.service";
 
 @Component({
@@ -10,16 +10,16 @@ import {customerService} from "../customer/service/customer.service";
 })
 export class ChooseAddressComponent implements OnInit {
 
-  public adresses: string[] = ['zgierz', 'lodz', 'wwa'];
+  public addresses: string[] = ['zgierz', 'lodz', 'wwa'];
   public chosen = -1;
   public name: string;
   public surname: string;
   public allAddress;
-  public defaultAdress;
+  public defaultAddress;
   public showAllAddress = false;
   @Output() id = new EventEmitter<number>();
 
-  constructor(private userAdressService: UserAdressService,
+  constructor(private userAddressService: UserAddressService,
               private customerService: customerService) { }
 
   ngOnInit() {
@@ -30,10 +30,10 @@ export class ChooseAddressComponent implements OnInit {
       this.name = user.name;
       this.surname = user.surname;
     }
-    this.userAdressService.getAllUserAdress(user.id).then(e => this.allAddress = e);
+    this.userAddressService.getAllUserAddress(user.id).then(e => this.allAddress = e);
 
-    this.userAdressService.getUserAdress(user.id).then(e => {
-      this.defaultAdress = e;
+    this.userAddressService.getUserAddress(user.id).then(e => {
+      this.defaultAddress = e;
     });
   }
 
@@ -50,7 +50,7 @@ export class ChooseAddressComponent implements OnInit {
   save() {
     this.allAddress.filter(e => {
       if (e.id === this.chosen) {
-        this.defaultAdress = e.adress;
+        this.defaultAddress = e.address;
 
         this.id.emit(e.id);
       }

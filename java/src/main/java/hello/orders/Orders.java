@@ -1,5 +1,6 @@
 package hello.orders;
 
+import hello.User.Address;
 import hello.User.User;
 
 import javax.persistence.*;

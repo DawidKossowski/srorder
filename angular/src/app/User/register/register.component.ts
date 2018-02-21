@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
           surname: this.surname,
           email: this.email,
           password: this.password,
-          adress: this.placeId
+          address: this.placeId
         }
       }).toPromise().then(response => {
         if (response.status === 200) {

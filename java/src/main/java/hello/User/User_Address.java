@@ -3,7 +3,7 @@ package hello.User;
 import javax.persistence.*;
 
 @Entity
-public class User_Adress {
+public class User_Address {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
@@ -13,15 +13,15 @@ public class User_Adress {
     private User user;
 
     @OneToOne
-    @JoinColumn(name="AdressId")
-    private Adress adress;
+    @JoinColumn(name="AddressId")
+    private Address address;
 
     public Integer getId() {
         return id;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setUser(User user) {
@@ -32,7 +32,7 @@ public class User_Adress {
         return user;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 }

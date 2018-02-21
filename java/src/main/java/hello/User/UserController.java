@@ -19,10 +19,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private User_AdressRepository user_adressRepository;
+    private User_AddressRepository user_addressRepository;
 
     @Autowired
-    private AdressController adressController;
+    private AddressController addressController;
 
 
 
@@ -35,22 +35,22 @@ public class UserController {
                                             @RequestParam String sex,
                                             @RequestParam String email,
                                             @RequestParam String password,
-                                            @RequestParam String adress) {
+                                            @RequestParam String address) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
         user.setSex(sex);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAdress(adressController.creareAdress(adress));
+        user.setAddress(addressController.creareAddress(address));
         userRepository.save(user);
 
 
-      /* User_Adress user_adress = new User_Adress();
-       user_adress.setAdress(adressController.creareAdress(adress));
-       user_adress.setUser(user);
+      /* User_Address user_address = new User_Address();
+       user_address.setAddress(addressController.creareAddress(address));
+       user_address.setUser(user);
 
-       user_adressRepository.save(user_adress);
+       user_addressRepository.save(user_address);
 */
 
         return user;
@@ -80,25 +80,25 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "wrong email and password")
     public class UserNotFoundException extends RuntimeException {}
 
-    @GetMapping (path= "/getUsersAdress")
-    public @ResponseBody List<Adress> getUsersAdress( @RequestParam Integer userId) {
-        List<Adress> addresses = new ArrayList<Adress>();
-        for (User_Adress useradress: user_adressRepository.findAll()
+    @GetMapping (path= "/getUsersAddress")
+    public @ResponseBody List<Address> getUsersAddress( @RequestParam Integer userId) {
+        List<Address> addresses = new ArrayList<Address>();
+        for (User_Address useraddress: user_addressRepository.findAll()
              ) {
-            if(useradress.getUser().getId().equals(userId)) {
-                LOG.info(useradress.getAdress().getAdress());
-                LOG.info(useradress.getAdress().getId() + "a");
+            if(useraddress.getUser().getId().equals(userId)) {
+                LOG.info(useraddress.getAddress().getAddress());
+                LOG.info(useraddress.getAddress().getId() + "a");
 
-                addresses.add(useradress.getAdress());
+                addresses.add(useraddress.getAddress());
             }
         }
 
         return addresses;
     }
 
-    @GetMapping (path = "/getDefaultAdress")
-    public @ResponseBody String getDefaultAdress( @RequestParam Integer userId) {
-      return userRepository.findUserByIntegerId(userId).getAdress().getAdress();
+    @GetMapping (path = "/getDefaultAddress")
+    public @ResponseBody String getDefaultAddress( @RequestParam Integer userId) {
+      return userRepository.findUserByIntegerId(userId).getAddress().getAddress();
     }
 
 }

@@ -27,7 +27,7 @@ import { ProductFilterComponent } from './product-list/product-filter/product-fi
 import { MyFocusDirective } from './directives/my-focus.directive';
 import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
 import { MapComponent } from './google-maps-2/map/map.component';
-import {UserAdressService} from "./services/user-adress.service";
+import {UserAddressService} from "./services/user-address.service";
 import { ChooseAddressComponent } from './choose-address/choose-address.component';
 
 @NgModule({
@@ -61,7 +61,7 @@ import { ChooseAddressComponent } from './choose-address/choose-address.componen
     AppRoutingModule
   ],
   providers: [ProductService, NewProductService, OrderService, customerService, CartStorageService,
-              UserStorageService, UserAdressService ],
+              UserStorageService, UserAddressService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

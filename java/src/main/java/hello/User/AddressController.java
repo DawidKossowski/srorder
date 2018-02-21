@@ -12,36 +12,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller    // This means that this class is a Controller
 @RequestMapping(path="/api") // This means URL's start with /demo (after Application path)
-public class AdressController {
+public class AddressController {
 
     @Autowired
-    private AdressRepository adressRepository;
+    private AddressRepository addressRepository;
 
     private static final Logger LOG = LoggerFactory.getLogger(OrdersController.class);
 
-    @RequestMapping(path= "/createAdress")
-    public @ResponseBody Adress creareAdress(@RequestParam String placeId) {
+    @RequestMapping(path= "/createAddress")
+    public @ResponseBody Address creareAddress(@RequestParam String placeId) {
 
-        for (Adress a :adressRepository.findAll()) {
-            if(a.getAdress() == placeId) {
+        for (Address a :addressRepository.findAll()) {
+            if(a.getAddress() == placeId) {
 
-                LOG.info("added referention to an old adress");
+                LOG.info("added referention to an old address");
                 return a;
             }
         }
 
-            Adress adress = new Adress();
-            adress.setAdress(placeId);
+            Address address = new Address();
+            address.setAddress(placeId);
 
-            adressRepository.save(adress);
-            LOG.info("new adress created");
-            return adress;
+            addressRepository.save(address);
+            LOG.info("new address created");
+            return address;
 
     }
 
-    @RequestMapping(path = "/getAdress")
-    public @ResponseBody Adress getAdress(@RequestParam Integer id) {
-        for (Adress a :adressRepository.findAll()) {
+    @RequestMapping(path = "/getAddress")
+    public @ResponseBody Address getAddress(@RequestParam Integer id) {
+        for (Address a :addressRepository.findAll()) {
             if(a.getId() == id) {
 
                 return a;
