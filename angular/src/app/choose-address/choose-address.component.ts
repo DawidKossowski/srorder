@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { User } from '../User/User';
 import {UserAdressService} from "../services/user-adress.service";
 import {customerService} from "../customer/service/customer.service";
@@ -17,7 +17,7 @@ export class ChooseAddressComponent implements OnInit {
   public allAddress;
   public defaultAdress;
   public showAllAddress = false;
-
+  @Output() id = new EventEmitter<number>();
 
   constructor(private userAdressService: UserAdressService,
               private customerService: customerService) { }
@@ -45,5 +45,17 @@ export class ChooseAddressComponent implements OnInit {
   choose(id) {
     this.chosen = id;
     console.log(id);
+  }
+
+  save() {
+    this.allAddress.filter(e => {
+      if (e.id === this.chosen) {
+        this.defaultAdress = e.adress;
+
+        this.id.emit(e.id);
+      }
+    });
+    this.showAllAddress = false;
+
   }
 }

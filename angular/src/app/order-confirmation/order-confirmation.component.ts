@@ -16,8 +16,8 @@ export class OrderConfirmationComponent implements OnInit {
   public name: string;
   public surname: string;
   public placeId: string;
-  public defaultAdress;
   public products: Product[];
+  public user: User;
 
   public fullAdress: string;
 
@@ -28,11 +28,9 @@ export class OrderConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.products = JSON.parse(localStorage.getItem('cart'));
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  setPlaceId(id: string) {
-    this.placeId = id;
-  }
 
   SubmitOrder() {
     this.customerService.createCustomer(this.name, this.surname, this.placeId).catch();
@@ -41,5 +39,13 @@ export class OrderConfirmationComponent implements OnInit {
         _idToSend.push(x.id);
     }    )
     this.productService.createOrder(_idToSend).catch();
+  }
+
+  test() {
+    console.log(this.user.adress.id);
+  }
+
+  getNewAddressId(number: number) {
+    this.user.adress.id = number;
   }
 }

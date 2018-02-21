@@ -29,7 +29,18 @@
   </div>
 
   <div class="col-md-12">
-    <app-choose-address ></app-choose-address>
+    <app-choose-address (id)="getNewAddressId($event)" ></app-choose-address>
   </div>
 
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-success btn-group-justified btn-lg u-margin-top">
+      Submit Order
+    </button>
+  </div>
+</div>
+
+
+<button (click)="test()">skurwiel</button>

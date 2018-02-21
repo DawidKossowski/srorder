@@ -10,3 +10,10 @@ body {
   display: block;
 }
 
+.u-margin-top {
+  margin-top: 10px;
+}
+
+.u-margin-bottom {
+  margin-bottom: 10px;
+}

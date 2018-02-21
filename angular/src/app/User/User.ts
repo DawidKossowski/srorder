@@ -1,3 +1,5 @@
+import { Adress } from './Adress';
+
 export class User {
   id: number;
   name: string;
@@ -5,4 +7,5 @@ export class User {
   email: string;
   password: string;
   sex: string;
+  adress: Adress;
 }
