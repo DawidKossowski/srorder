@@ -28,25 +28,6 @@ export class OrderConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.products = JSON.parse(localStorage.getItem('cart'));
-    let user: User = new User();
-    user = JSON.parse(localStorage.getItem('currentUser'));
-
-    if(user) {
-      this.name = user.name;
-      this.surname = user.surname;
-    }
-
-    this.userAdressService.getUserAdress(user.id).then(e => {
-      this.defaultAdress = e;
-      this.placeId = this.defaultAdress[0].formatted_address;
-      this.fullAdress = this.name + " " + this.surname + this.placeId;
-    });
-
-  }
-
-  test() {
-    console.log(this.defaultAdress);
-    this.placeId = this.defaultAdress[0].formatted_address;
   }
 
   setPlaceId(id: string) {

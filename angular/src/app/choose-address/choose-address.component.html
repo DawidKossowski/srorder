@@ -1,11 +1,131 @@
-<form name="myForm" ng-controller="ExampleController">
-<div *ngFor="let adress of adresses">
+
+
+<div class="address-wrapper" (click)="choose(-1)" [ngClass] = " {'selected' : ((chosen == -1) && (showAllAddress)) }">
   <label>
-    <input type="radio" name = {{adress}} [(ngModel)]="chosen" value ={{adress}} >
-    {{adress}}
-  </label><br/>
-
-
+    <input *ngIf="showAllAddress" [checked]="chosen == -1" class="address-btn" type="radio" name="address" value ="-1" >
+  </label>
+  <div *ngIf="defaultAdress">
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Name: </p>
+      </div>
+      <div class="col-md-8">
+        <p>{{name}}</p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Surname: </p>
+      </div>
+      <div class="col-md-8">
+        <p>{{surname}}</p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Street: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{defaultAdress[0].address_components[1].long_name}} {{defaultAdress[0].address_components[0].long_name}}
+        </p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>City: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{defaultAdress[0].address_components[3].long_name}}
+        </p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Region: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{defaultAdress[0].address_components[5].long_name}}
+        </p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Country: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{defaultAdress[0].address_components[6].long_name}}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
-</form>
-<div> wybrane = {{chosen}}</div>
+
+
+<ng-container *ngFor="let address of allAddress">
+  <div class="address-wrapper" *ngIf="defaultAdress && showAllAddress" [ngClass] = " {'selected' : (chosen == address.id) }" (click)="choose(address.id)">
+    <label>
+    <input *ngIf="showAllAddress" [checked]="chosen === address.id" class="address-btn" type="radio" name="address"  value ={{address.id}} (click)="test()" >
+    </label>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Name: </p>
+      </div>
+      <div class="col-md-8">
+        <p>{{name}}</p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Surname: </p>
+      </div>
+      <div class="col-md-8">
+        <p>{{surname}}</p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Street: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{address.adress[0].address_components[1].long_name}} {{address.adress[0].address_components[0].long_name}}
+        </p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>City: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{address.adress[0].address_components[3].long_name}}
+        </p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Region: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{address.adress[0].address_components[5].long_name}}
+        </p>
+      </div>
+    </div>
+    <div class="row address">
+      <div class="col-md-4 address-description">
+        <p>Country: </p>
+      </div>
+      <div class="col-md-8">
+        <p>
+          {{address.adress[0].address_components[6].long_name}}
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<button class="btn btn-primary u-block" (click)="showAllAddresses()"> Change addres</button>
