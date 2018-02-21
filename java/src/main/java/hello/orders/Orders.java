@@ -20,6 +20,10 @@ public class Orders {
     @JoinColumn(name="userId")
     private User user;
 
+    @OneToOne
+    @JoinColumn(name="addres")
+    private Address address;
+
     public Integer getId() {
         return id;
     }
@@ -42,5 +46,13 @@ public class Orders {
 
     public void setUser(User customer) {
         this.user = customer;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

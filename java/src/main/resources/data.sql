@@ -4,9 +4,9 @@ INSERT INTO `product` (name, price, amount) VALUES ('piguly', 666, 69);
 INSERT INTO `product` (name, price, amount) VALUES ('kielbassa', 32, 0);
 
 
-INSERT INTO `address` (address) VALUE ('ChIJi0FfadA0GkcRGMY5IrGRwvs');
-INSERT INTO `address` (address) VALUE ('ChIJWcMzpXK2G0cR62Io87SWZPg');
-INSERT INTO `address` (address) VALUE ('ChIJ8clUuUx6E2sR6nU8x8GtzPc');
+INSERT INTO `address` (address, name, surname) VALUE ('ChIJi0FfadA0GkcRGMY5IrGRwvs', 'Kubuś', 'Puchałke');
+INSERT INTO `address` (address, name, surname) VALUE ('ChIJWcMzpXK2G0cR62Io87SWZPg', 'Ala', 'Makota');
+INSERT INTO `address` (address, name, surname) VALUE ('ChIJ8clUuUx6E2sR6nU8x8GtzPc', 'Kasiulka', 'Pizdulka');
 
 
 

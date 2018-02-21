@@ -20,7 +20,7 @@ public class AddressController {
     private static final Logger LOG = LoggerFactory.getLogger(OrdersController.class);
 
     @RequestMapping(path= "/createAddress")
-    public @ResponseBody Address creareAddress(@RequestParam String placeId) {
+    public @ResponseBody Address creareAddress(@RequestParam String placeId, @RequestParam String name, @RequestParam String surname ) {
 
         for (Address a :addressRepository.findAll()) {
             if(a.getAddress() == placeId) {
@@ -32,6 +32,8 @@ public class AddressController {
 
             Address address = new Address();
             address.setAddress(placeId);
+            address.setName(name);
+            address.setSurname(surname);
 
             addressRepository.save(address);
             LOG.info("new address created");

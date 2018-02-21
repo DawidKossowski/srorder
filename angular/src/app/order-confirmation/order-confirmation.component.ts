@@ -32,16 +32,14 @@ export class OrderConfirmationComponent implements OnInit {
   }
 
   submitOrder() {
-
-  }
-  SubmitOrder() {
-    this.customerService.createCustomer(this.name, this.surname, this.placeId).catch();
     const _idToSend: Array<Number> = [];
-    this.products.forEach(x=> {
-        _idToSend.push(x.id);
-    }    )
-    this.productService.createOrder(_idToSend).catch();
+    this.products.forEach(x => {
+      _idToSend.push(x.id);
+    });
+
+    this.productService.createOrder(_idToSend, this.user.name, this.user.surname);
   }
+
 
   getNewAddressId(number: number) {
     this.user.address.id = number;

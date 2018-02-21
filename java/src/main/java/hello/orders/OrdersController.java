@@ -33,8 +33,11 @@ public class OrdersController {
 
 
     @RequestMapping(path="/createOrder")
-    public @ResponseBody String createOrder(@RequestBody int[] products) {
-        Orders o = new Orders();
+    public @ResponseBody String createOrder(@RequestBody Object param) {
+        LOG.warn(param.toString());
+        LOG.warn(param);
+
+      /*  Orders o = new Orders();
         o.setDate(new Date());
        // o.setCustomer(customer);
 
@@ -47,7 +50,7 @@ public class OrdersController {
             order_product.setOrder(o);
             order_productRepository.save(order_product);
             LOG.info("new order crated");
-        }
+        }*/
 
 
         return "Created";
@@ -64,6 +67,7 @@ public class OrdersController {
                 vieworder.products = new ArrayList<>();
                 vieworder.id = order.getOrder().getId();
                 vieworder.date = order.getOrder().getDate();
+                vieworder.address = order.getOrder().getAddress();
 
                 vieworder.products.add(order.getProduct());
                 result.add(vieworder);

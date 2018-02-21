@@ -42,7 +42,7 @@ public class UserController {
         user.setSex(sex);
         user.setEmail(email);
         user.setPassword(password);
-        user.setAddress(addressController.creareAddress(address));
+        user.setAddress(addressController.creareAddress(address, name, surname));
         userRepository.save(user);
 
 

@@ -22,8 +22,14 @@ export class ProductService {
       .catch(this.handleError);
   }
 
-  createOrder(productsId: Array<Number>): Promise<string> {
-    return this.http.post(this.orderUrl, productsId)
+  createOrder(productsId: Array<Number>, name: string, surname: string ): Promise<string> {
+    const parameters = {
+      'name': name,
+      'surname': surname,
+      'productsIds': productsId
+    };
+
+    return this.http.post(this.orderUrl, parameters)
       .toPromise()
       .then()
       .catch(this.handleError);
