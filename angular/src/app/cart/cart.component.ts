@@ -65,6 +65,9 @@ export class CartComponent implements OnInit, OnChanges {
 
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
+    if(this.isUserLogged) {
+      this.saveCartInDBatOnce();
+    }
     console.log(this.cartContent);
     this.totalPrice = 0;
     if (this.cartContent) {
@@ -72,9 +75,7 @@ export class CartComponent implements OnInit, OnChanges {
         this.totalPrice += x.price * x.amount;
       });
     }
-    if(this.isUserLogged) {
-      this.saveCartInDBatOnce();
-    }
+
   }
 
   closeCart() {
@@ -92,37 +93,9 @@ export class CartComponent implements OnInit, OnChanges {
     }
   }
 
-  saveCartInDatabase() {
-    /*this.cartContent.forEach(el => {
-      console.log(el);
-      this.http.get('/api/saveCartItem', {params: {
-          productId: el.id,
-          userId: (JSON.parse( localStorage.getItem('currentUser')) as User).id,
-          amount: el.amount
-        }}).toPromise().then();
-    })*/
-    var iter = 0;
-    var ifSaved = false;
-    while (iter < this.cartContent.length) {
-      if(!ifSaved){
-        ifSaved = true;
-        this.http.get('/api/saveCartItem', {params: {
-            productId: this.cartContent[iter].id,
-            userId: ( JSON.parse(localStorage.getItem('currentUser')) as User).id,
-            amount: this.cartContent[iter].amount
-          }}).toPromise().then(res => {
-          console.log(res);
-          iter++;
-          ifSaved = false;
-        }).catch();
-      }
-    }
-  }
-
   saveCartInDBatOnce() {
     const _idToSend: Array<Number> = [];
     const _amountsToSend: Array<Number> = [];
-
     this.cartContent.forEach( x => {
       _idToSend.push(x.id);
       _amountsToSend.push(x.amount);
@@ -137,6 +110,5 @@ export class CartComponent implements OnInit, OnChanges {
     this.http.post('/api/saveCartAtOnce', parameters) .toPromise()
       .then()
       .catch();
-
   }
 }

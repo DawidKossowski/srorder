@@ -52,35 +52,6 @@ public class CartController {
         return null;
     }
 
-    @GetMapping(path = "/saveCartItem")
-    public @ResponseBody String saveCart(@RequestParam Integer productId,
-                                         @RequestParam Integer userId,
-                                         @RequestParam Integer amount) {
-        LOG.info("weszlo");
-        if(getCartByUserId(userId)==null) {
-            UserCart userCart = new UserCart();
-            userCart.user = this.userController.getUserById(userId);
-            this.cartRepository.save(userCart);
-            LOG.info("new cart created");
-        }
-
-        for (CartItem cartitem : getItemsInCartByCartId( this.getCartByUserId(userId).id)) {
-            if (cartitem.product.getId() == productId) {
-                cartitem.amount = amount;
-                //alreadyInTheCart = true;
-                this.cartItemRepository.save(cartitem);
-                return "amount incremented";
-            }
-        }
-        //  if (!alreadyInTheCart) {
-        CartItem cartItem = new CartItem();
-        cartItem.cart = getCartByUserId(userId);
-        cartItem.product = this.productController.findProductById(productId);
-        cartItem.amount = amount;
-        this.cartItemRepository.save(cartItem);
-        return "productAdded";
-    }
-
     @RequestMapping(path ="/saveCartAtOnce")
     public @ResponseBody String save(@RequestBody WholeCartView cartToSave) {
         if(getCartByUserId(cartToSave.userId)==null) {
@@ -90,25 +61,47 @@ public class CartController {
             LOG.info("new cart created");
         }
         boolean isAlreadyInCart = false;
+        Integer updated = 0;
+        Integer added = 0;
+        Integer removed = 0;
 
-            for (Integer i = 0; i < cartToSave.amounts.size(); i++) {
+            for (Integer i = 0; i < cartToSave.productsIds.size(); i++) {
+
                 for (CartItem cartitem : getItemsInCartByCartId( this.getCartByUserId(cartToSave.userId).id)) {
-                    if (cartitem.product.getId() == cartToSave.productsIds.get(i)) {
-                        cartitem.amount = cartToSave.amounts.get(i);
-                        this.cartItemRepository.save(cartitem);
+                    if (cartitem.product.getId() == cartToSave.productsIds.get(i)) { //if already exists in cart
                         isAlreadyInCart = true;
-                        LOG.warn("product updated");
+                        if(cartitem.amount != cartToSave.amounts.get(i) ) { //update
+                            updated ++;
+                            cartitem.amount = cartToSave.amounts.get(i);
+                            this.cartItemRepository.save(cartitem);
+                        }
                     }
-            }
-                if(!isAlreadyInCart) {
+                }
+                if(!isAlreadyInCart) { //create new if doesnt exists in cart
                     CartItem cartItem = new CartItem();
                     cartItem.cart = getCartByUserId(cartToSave.userId);
                     cartItem.product = this.productController.findProductById(cartToSave.productsIds.get(i));
                     cartItem.amount = cartToSave.amounts.get(i);
                     this.cartItemRepository.save(cartItem);
-                    LOG.warn("product addded");
+                    added++;
                 }
         }
+        boolean stillInCart;
+        for ( CartItem cartItemInDB: getItemsInCartByCartId( this.getCartByUserId(cartToSave.userId).id) ) {
+            stillInCart = false;
+            for ( Integer x: cartToSave.productsIds ) { //check if anything is removed from cart
+                if( cartItemInDB.product.getId() == x )
+                    stillInCart = true;
+            }
+            if( !stillInCart ) {
+                removed++;
+                this.cartItemRepository.delete(cartItemInDB);
+                break;
+            }
+        }
+
+
+        LOG.info(updated + " products updated, " +added + " products added, " + removed + " products removed");
 
         return "Cart saved";
     }
