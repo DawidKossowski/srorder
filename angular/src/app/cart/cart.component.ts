@@ -119,6 +119,7 @@ export class CartComponent implements OnInit, OnChanges {
       .catch();
   }*/
  get() {
+
    this.cartStorageService.get();
  }
 
