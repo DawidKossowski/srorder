@@ -40,7 +40,6 @@ export class CartStorageService {
       'amounts': _amountsToSend,
       'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
     };
-    console.log(parameters);
     this.http.post('/api/saveCartAtOnce', parameters) .toPromise()
       .then()
       .catch();
@@ -49,14 +48,13 @@ export class CartStorageService {
 
   deliverCart() {
     return this.http.get('/api/getUserCart', {params: {userId: (JSON.parse(localStorage.getItem('currentUser')) as User).id}})
-      .toPromise().then();
+      .toPromise().then().catch();
   }
 
 
   getCart(): any {
      return new Promise( resolve => {
        this.deliverCart().then(response => {
-           console.log(response);
            resolve(response.json() as Product[]);
          });
      });
@@ -93,29 +91,9 @@ export class CartStorageService {
 
     return new Promise(resolve => {
       this.mergeCart(parameters)
-        .then( this.getCart().then(response => resolve(response)));
-    });
-
-
+        .then( this.getCart().then(response =>
+          resolve(response)));
+    }).catch();
   }
 
-  merge(cartContent: Product[]) {
-    const _idToSend: Array<Number> = [];
-    const _amountsToSend: Array<Number> = [];
-    cartContent.forEach( x => {
-      _idToSend.push(x.id);
-      _amountsToSend.push(x.amount);
-    });
-
-    const parameters = {
-      'productsIds': _idToSend,
-      'amounts': _amountsToSend,
-      'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
-    };
-    console.log(parameters);
-    this.http.post('/api/mergeCart', parameters)
-      .toPromise()
-      .then()
-      .catch();
-  }
 }

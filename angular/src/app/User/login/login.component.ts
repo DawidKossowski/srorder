@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
                                             password: this.password } })
       .toPromise()
       .then(response => {
-        console.log(response.status);
+        //console.log(response.status);
         if (response.status === 200) {
           this.userStorageService.setItem('currentUser', JSON.stringify(response.json() as User));
           console.log(localStorage.getItem('currentUser'));

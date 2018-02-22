@@ -24,7 +24,6 @@ export class UserAddressService {
     return new Promise(resolve => {
       this.getPlaceIdByUserId(id).then(response => {
         this.geocoder.geocode({'placeId': response }, function(results, status) {
-           console.log(results);
            resolve(results);
         });
       });
