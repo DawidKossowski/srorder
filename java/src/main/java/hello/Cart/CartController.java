@@ -2,6 +2,7 @@ package hello.Cart;
 
 import hello.User.UserController;
 import hello.orders.OrdersController;
+import hello.products.Product;
 import hello.products.ProductController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ public class CartController {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrdersController.class);
 
+
     @GetMapping(path = "/createCart")
     public @ResponseBody
     UserCart createCart(@RequestParam Integer userId) {
@@ -52,8 +54,10 @@ public class CartController {
         return null;
     }
 
+
     @RequestMapping(path ="/saveCartAtOnce")
     public @ResponseBody String save(@RequestBody WholeCartView cartToSave) {
+
         if(getCartByUserId(cartToSave.userId)==null) {
             UserCart userCart = new UserCart();
             userCart.user = this.userController.getUserById(cartToSave.userId);
@@ -106,6 +110,42 @@ public class CartController {
         return "Cart saved";
     }
 
+    @RequestMapping(path ="/mergeCart")
+    public @ResponseBody String mergeCart(@RequestBody WholeCartView cartToSave) {
+
+        if(getCartByUserId(cartToSave.userId)==null) {
+            save(cartToSave);
+        }
+        boolean isAlreadyInCart = false;
+        Integer updated = 0;
+        Integer added = 0;
+
+        for (Integer i = 0; i < cartToSave.productsIds.size(); i++) {
+            for (CartItem cartitem : getItemsInCartByCartId( this.getCartByUserId(cartToSave.userId).id)) {
+                if (cartitem.product.getId() == cartToSave.productsIds.get(i)) { //if already exists in cart
+                    isAlreadyInCart = true;
+                  /*  if(cartitem.amount != cartToSave.amounts.get(i) ) { //update
+                        updated ++;
+                        cartitem.amount = cartToSave.amounts.get(i);
+                        this.cartItemRepository.save(cartitem);
+                    }*/
+                }
+            }
+            if(!isAlreadyInCart) { //create new if doesnt exists in cart
+                CartItem cartItem = new CartItem();
+                cartItem.cart = getCartByUserId(cartToSave.userId);
+                cartItem.product = this.productController.findProductById(cartToSave.productsIds.get(i));
+                cartItem.amount = cartToSave.amounts.get(i);
+                this.cartItemRepository.save(cartItem);
+                added++;
+            }
+        }
+
+        LOG.info(updated + " products updated, " +added + " products added");
+
+        return "Cart saved";
+    }
+
 
     @GetMapping(path = "/findItemInCart")
     public @ResponseBody
@@ -118,6 +158,22 @@ public class CartController {
             }
         }
         return result;
+    }
+
+    @GetMapping(path = "/getUserCart")
+    public @ResponseBody
+    List<Product> getUserCart(@RequestParam Integer userId) {
+        Integer cartId = getCartByUserId(userId).id;
+
+         List<Product> products= new ArrayList<>();
+         Integer iter = 0;
+
+        for (CartItem cartItem: getItemsInCartByCartId(cartId) ) {
+            products.add(cartItem.product);
+            products.get(iter).setAmount( cartItem.amount);
+            iter ++;
+        }
+         return products;
     }
 
 

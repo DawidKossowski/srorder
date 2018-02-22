@@ -5,6 +5,7 @@ import {User} from "../User";
 import {UserStorageService} from "../../services/user-storage.service";
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
+import {CartStorageService} from "../../services/cart-storage.service";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
   constructor(
               private userStorageService: UserStorageService,
               private router: Router,
-              private http: Http) {
+              private http: Http,
+              private cartStorageService: CartStorageService) {
   }
 
   ngOnInit() {
@@ -33,9 +35,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public Register(form: NgForm) {
-
-
-
       this.http.get('/api/registration', {
         params: {
           sex: this.sex,
@@ -54,21 +53,9 @@ export class RegisterComponent implements OnInit {
         } else {
           alert("something went wrong");
         }
-      })
+      });
 
 
-
-      // console.log(this.sex);
-      /* this.userService.registerUser(this.sex, this.name, this.surname, this.email, this.password, this.placeId).catch();
-       let user: User = new User();
-       user.name = this.name;
-       user.surname = this.surname;
-       user.email = this.email;
-       this.userStorageService.setItem('currentUser', user);
-       //this.userStorageService.setItem('currentUser', JSON.stringify(this.userService.registerUser(this.sex, this.name, this.surname, this.email, this.password, this.placeId)) );
-       console.log(localStorage.getItem('currentUser'));
-       form.reset();
-       this.router.navigateByUrl('/list');*/
     }
 
 

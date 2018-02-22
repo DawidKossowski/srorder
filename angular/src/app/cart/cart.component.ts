@@ -23,27 +23,33 @@ export class CartComponent implements OnInit, OnChanges {
 
   constructor(private router: Router,
               private cartStorageService: CartStorageService,
-              private userStorageService: UserStorageService,
-              private http: Http) { }
+              private userStorageService: UserStorageService) { }
 
   ngOnInit() {
     this.updateCart();
     if(localStorage.getItem('currentUser')) {
       this.isUserLogged = true;
+      this.updateStorage();
     } else {
       this.isUserLogged = false;
     }
     this.userStorageService.watchStorage().subscribe( () => {
       if(localStorage.getItem('currentUser')) {
         this.isUserLogged = true;
+        console.log(this.cartContent);
+        //this.updateStorage();
+        //this.get();
+     //  this.get();
+        //metoda do merdzowania koszyków
       } else {
         this.isUserLogged = false;
       }
-    })
+    });
   }
 
   ngOnChanges() {
     this.updateCart();
+    //this.updateStorage();
   }
 
   @HostListener('document:click', ['$event'])
@@ -60,14 +66,16 @@ export class CartComponent implements OnInit, OnChanges {
 
   updateStorage() {
     this.cartStorageService.setItem('cart', JSON.stringify(this.cartContent));
+    if(this.isUserLogged && this.cartContent!=null) {
+      this.cartStorageService.saveCartInDB(this.cartContent);
+    }
+    this.get();
     this.updateCart();
   }
 
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
-    if(this.isUserLogged) {
-      this.saveCartInDBatOnce();
-    }
+
     console.log(this.cartContent);
     this.totalPrice = 0;
     if (this.cartContent) {
@@ -75,7 +83,6 @@ export class CartComponent implements OnInit, OnChanges {
         this.totalPrice += x.price * x.amount;
       });
     }
-
   }
 
   closeCart() {
@@ -93,7 +100,7 @@ export class CartComponent implements OnInit, OnChanges {
     }
   }
 
-  saveCartInDBatOnce() {
+ /* saveCartInDB() {
     const _idToSend: Array<Number> = [];
     const _amountsToSend: Array<Number> = [];
     this.cartContent.forEach( x => {
@@ -110,5 +117,23 @@ export class CartComponent implements OnInit, OnChanges {
     this.http.post('/api/saveCartAtOnce', parameters) .toPromise()
       .then()
       .catch();
+  }*/
+ get() {
+   this.cartStorageService.get();
+ }
+
+ save() {
+   if(this.isUserLogged && (this.cartContent!=null)) {
+     console.log(this.cartContent);
+     this.cartStorageService.saveCartInDB(this.cartContent);
+   }
+ }
+
+  merge() {
+    this.updateCart();
+    if(this.isUserLogged && (this.cartContent!=null)) {
+
+      this.cartStorageService.merge(this.cartContent);
+    }
   }
 }

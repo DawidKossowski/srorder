@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         if (response.status === 200) {
           this.userStorageService.setItem('currentUser', JSON.stringify(response.json() as User));
           console.log(localStorage.getItem('currentUser'));
-          form.reset();
+          //form.reset();
           this.router.navigateByUrl('/list');
         }
       }).catch(err => this.handleError(err));
@@ -46,7 +46,10 @@ export class LoginComponent implements OnInit {
       alert("Wrong email");
     } else if (error.status === 406) {
       alert("wrong password");
+    } else if(error.status === 100) {
+      alert("200");
     } else {
+      alert(error.message);
       alert("something went wrong");
     }
   }
