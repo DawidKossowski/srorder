@@ -26,8 +26,8 @@ export class CartStorageService{
     this.storageSub.next();
   }
 
-  saveCartInDB(cartContent: Product[] ) {
 
+  saveCartInDB(cartContent: Product[] ) {
     const _idToSend: Array<Number> = [];
     const _amountsToSend: Array<Number> = [];
     cartContent.forEach( x => {
@@ -46,13 +46,60 @@ export class CartStorageService{
       .catch();
   }
 
-  get() {
-    this.http.get('/api/getUserCart', {params: {userId: (JSON.parse(localStorage.getItem('currentUser')) as User).id}})
-      .toPromise()
-      .then(response => {
+
+  deliverCart() {
+    return this.http.get('/api/getUserCart', {params: {userId: (JSON.parse(localStorage.getItem('currentUser')) as User).id}})
+      .toPromise().then();
+  }
+
+
+  getCart(): any {
+     return new Promise( resolve => {
+       this.deliverCart().then(response => {
+           console.log(response);
+           resolve(response.json() as Product[]);
+         });
+     });
+  }
+
+
+  post(parameters) {
+    return this.http.post('/api/mergeCart', parameters). toPromise()
+      .then().catch();
+  }
+
+  mergeCart(parameters) {
+    return new Promise( resolve => {
+      this.post(parameters).then( response => {
+        resolve(response);
+      });
+
+    });
+  }
+
+  mergeAndGetCart(cartContent: Product[]) {
+    const _idToSend: Array<Number> = [];
+    const _amountsToSend: Array<Number> = [];
+    cartContent.forEach( x => {
+      _idToSend.push(x.id);
+      _amountsToSend.push(x.amount);
+    });
+
+    const parameters = {
+      'productsIds': _idToSend,
+      'amounts': _amountsToSend,
+      'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
+    };
+
+    return new Promise(resolve => {
+      (this.mergeCart(parameters)
+        .then( this.getCart()))
+        .then(response => {
         console.log(response);
-      })
-      .catch();
+        resolve(response.json() as Product[]);
+      })} );
+
+
   }
 
   merge(cartContent: Product[]) {
@@ -72,6 +119,5 @@ export class CartStorageService{
     this.http.post('/api/mergeCart', parameters) .toPromise()
       .then()
       .catch();
-
   }
 }

@@ -31,11 +31,11 @@ export class CartComponent implements OnInit, OnChanges {
     this.updateCart();
     if(localStorage.getItem('currentUser')) {
       this.isUserLogged = true;
-
       this.updateStorage();
     } else {
       this.isUserLogged = false;
     }
+
     this.userStorageService.watchStorage().subscribe( () => {
       if(localStorage.getItem('currentUser')) {
         this.isUserLogged = true;
@@ -43,10 +43,10 @@ export class CartComponent implements OnInit, OnChanges {
 
         if(this.cartContent != null) {
           this.mergenget();
+          //this.cartStorageService.mergeAndGetCart(this.cartContent);
         }  else {
           this.get();
         }
-
       } else {
         this.isUserLogged = false;
       }
@@ -55,7 +55,6 @@ export class CartComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.updateCart();
-    //this.updateStorage();
   }
 
   @HostListener('document:click', ['$event'])
@@ -75,8 +74,6 @@ export class CartComponent implements OnInit, OnChanges {
     if(this.isUserLogged && this.cartContent!=null) {
       this.cartStorageService.saveCartInDB(this.cartContent);
     }
-
-    //this.get();
     this.updateCart();
   }
 
@@ -107,55 +104,20 @@ export class CartComponent implements OnInit, OnChanges {
     }
   }
 
- /* saveCartInDB() {
-    const _idToSend: Array<Number> = [];
-    const _amountsToSend: Array<Number> = [];
-    this.cartContent.forEach( x => {
-      _idToSend.push(x.id);
-      _amountsToSend.push(x.amount);
-    });
-
-    const parameters = {
-      'productsIds': _idToSend,
-      'amounts': _amountsToSend,
-      'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
-    };
-
-    this.http.post('/api/saveCartAtOnce', parameters) .toPromise()
-      .then()
-      .catch();
-  }*/
  get() {
-   this.http.get('/api/getUserCart',
-     {params: {userId: (JSON.parse(localStorage.getItem('currentUser')) as User).id}})
-     .toPromise()
-     .then(response => {
-       this.cartContent = ( response.json() as Product[]);
-       this.updateStorage();
-     })
-     .catch();
-
-
+    this.cartStorageService.getCart().then( result=> {
+      this.cartContent = result;
+      this.updateStorage();
+    });
  }
 
- save() {
-   if(this.isUserLogged && (this.cartContent!=null)) {
-     console.log(this.cartContent);
-     this.cartStorageService.saveCartInDB(this.cartContent);
-   }
- }
-
-  merge() {
-    this.updateCart();
-    if(this.isUserLogged && (this.cartContent!=null)) {
-
-      this.cartStorageService.merge(this.cartContent);
-    }
-  }
 
   mergenget() {
 
-    const _idToSend: Array<Number> = [];
+    this.cartStorageService.mergeAndGetCart(this.cartContent).then( result => {
+      this.cartContent =result ;
+    });
+   /* const _idToSend: Array<Number> = [];
     const _amountsToSend: Array<Number> = [];
     this.cartContent.forEach( x => {
       _idToSend.push(x.id);
@@ -178,8 +140,7 @@ export class CartComponent implements OnInit, OnChanges {
           this.updateStorage();
         })
         .catch(); })
-      .catch();
-
+      .catch();*/
   }
 
 }
