@@ -3,6 +3,9 @@ import {Product} from '../product-list/product';
 import { Router } from '@angular/router';
 import { CartStorageService } from '../services/cart-storage.service';
 import {UserStorageService} from "../services/user-storage.service";
+import {Http} from "@angular/http";
+import {forEach} from "@angular/router/src/utils/collection";
+import {User} from "../User/User";
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +23,8 @@ export class CartComponent implements OnInit, OnChanges {
 
   constructor(private router: Router,
               private cartStorageService: CartStorageService,
-              private userStorageService: UserStorageService) { }
+              private userStorageService: UserStorageService,
+              private http: Http) { }
 
   ngOnInit() {
     this.updateCart();
@@ -61,11 +65,15 @@ export class CartComponent implements OnInit, OnChanges {
 
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
+    console.log(this.cartContent);
     this.totalPrice = 0;
     if (this.cartContent) {
       this.cartContent.forEach( x => {
         this.totalPrice += x.price * x.amount;
       });
+    }
+    if(this.isUserLogged) {
+      this.saveCartInDBatOnce();
     }
   }
 
@@ -75,12 +83,60 @@ export class CartComponent implements OnInit, OnChanges {
 
   submitOrder() {
     if(this.isUserLogged){
-      this.router.navigateByUrl('/orderConfirmation');
+      this.router.navigateByUrl('/orderConfirmation').catch();
       this.showCart = false;
     }
    else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login').catch();
       this.showCart = false;
     }
+  }
+
+  saveCartInDatabase() {
+    /*this.cartContent.forEach(el => {
+      console.log(el);
+      this.http.get('/api/saveCartItem', {params: {
+          productId: el.id,
+          userId: (JSON.parse( localStorage.getItem('currentUser')) as User).id,
+          amount: el.amount
+        }}).toPromise().then();
+    })*/
+    var iter = 0;
+    var ifSaved = false;
+    while (iter < this.cartContent.length) {
+      if(!ifSaved){
+        ifSaved = true;
+        this.http.get('/api/saveCartItem', {params: {
+            productId: this.cartContent[iter].id,
+            userId: ( JSON.parse(localStorage.getItem('currentUser')) as User).id,
+            amount: this.cartContent[iter].amount
+          }}).toPromise().then(res => {
+          console.log(res);
+          iter++;
+          ifSaved = false;
+        }).catch();
+      }
+    }
+  }
+
+  saveCartInDBatOnce() {
+    const _idToSend: Array<Number> = [];
+    const _amountsToSend: Array<Number> = [];
+
+    this.cartContent.forEach( x => {
+      _idToSend.push(x.id);
+      _amountsToSend.push(x.amount);
+    });
+
+    const parameters = {
+      'productsIds': _idToSend,
+      'amounts': _amountsToSend,
+      'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
+    };
+
+    this.http.post('/api/saveCartAtOnce', parameters) .toPromise()
+      .then()
+      .catch();
+
   }
 }

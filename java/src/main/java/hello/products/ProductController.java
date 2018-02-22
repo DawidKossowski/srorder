@@ -48,4 +48,9 @@ public class ProductController {
 		// This returns a JSON or XML with the users
 		return productRepository.findAll();
 	}
+
+	@GetMapping(path = "/findProductById")
+	public @ResponseBody Product findProductById(Integer productId) {
+		return productRepository.findProductByIntegerId(productId);
+	}
 }

@@ -49,7 +49,5 @@ export class LoginComponent implements OnInit {
     } else {
       alert("something went wrong");
     }
-
-    //return Promise.reject(error.message || error);
   }
 }

@@ -2,6 +2,7 @@ package hello.User;
 
 import java.util.*;
 import ch.qos.logback.core.joran.spi.ActionException;
+import hello.Cart.CartController;
 import hello.products.ProductController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private AddressController addressController;
+
+    @Autowired
+    private CartController cartController;
 
 
 
