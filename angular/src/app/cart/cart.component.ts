@@ -6,6 +6,7 @@ import {UserStorageService} from "../services/user-storage.service";
 import {Http} from "@angular/http";
 import {forEach} from "@angular/router/src/utils/collection";
 import {User} from "../User/User";
+import {log} from "util";
 
 @Component({
   selector: 'app-cart',
@@ -23,7 +24,8 @@ export class CartComponent implements OnInit, OnChanges {
 
   constructor(private router: Router,
               private cartStorageService: CartStorageService,
-              private userStorageService: UserStorageService) { }
+              private userStorageService: UserStorageService,
+              private http: Http) { }
 
   ngOnInit() {
     this.updateCart();
@@ -36,11 +38,14 @@ export class CartComponent implements OnInit, OnChanges {
     this.userStorageService.watchStorage().subscribe( () => {
       if(localStorage.getItem('currentUser')) {
         this.isUserLogged = true;
-        console.log(this.cartContent);
-        //this.updateStorage();
-        //this.get();
-     //  this.get();
-        //metoda do merdzowania koszyków
+        this.updateCart();
+
+        if(this.cartContent != null) {
+          this.mergenget();
+        }  else {
+          this.get();
+        }
+
       } else {
         this.isUserLogged = false;
       }
@@ -119,8 +124,16 @@ export class CartComponent implements OnInit, OnChanges {
       .catch();
   }*/
  get() {
+   this.http.get('/api/getUserCart',
+     {params: {userId: (JSON.parse(localStorage.getItem('currentUser')) as User).id}})
+     .toPromise()
+     .then(response => {
+       this.cartContent = ( response.json() as Product[]);
+       this.updateStorage();
+     })
+     .catch();
 
-   this.cartStorageService.get();
+
  }
 
  save() {
@@ -137,4 +150,34 @@ export class CartComponent implements OnInit, OnChanges {
       this.cartStorageService.merge(this.cartContent);
     }
   }
+
+  mergenget() {
+
+    const _idToSend: Array<Number> = [];
+    const _amountsToSend: Array<Number> = [];
+    this.cartContent.forEach( x => {
+      _idToSend.push(x.id);
+      _amountsToSend.push(x.amount);
+    });
+
+    const parameters = {
+      'productsIds': _idToSend,
+      'amounts': _amountsToSend,
+      'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
+    };
+    console.log(parameters);
+    this.http.post('/api/mergeCart', parameters) .toPromise()
+      .then( res => {
+        this.http.get('/api/getUserCart',
+          {params: {userId: (JSON.parse(localStorage.getItem('currentUser')) as User).id}})
+        .toPromise()
+        .then(response => {
+          this.cartContent = ( response.json() as Product[]);
+          this.updateStorage();
+        })
+        .catch(); })
+      .catch();
+
+  }
+
 }
