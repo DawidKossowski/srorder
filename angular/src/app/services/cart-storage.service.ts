@@ -6,7 +6,7 @@ import {User} from "../User/User";
 import {Http} from "@angular/http";
 
 @Injectable()
-export class CartStorageService{
+export class CartStorageService {
 
   constructor(private http: Http) { }
 
@@ -92,12 +92,9 @@ export class CartStorageService{
     };
 
     return new Promise(resolve => {
-      (this.mergeCart(parameters)
-        .then( this.getCart()))
-        .then(response => {
-        console.log(response);
-        resolve(response.json() as Product[]);
-      })} );
+      this.mergeCart(parameters)
+        .then( this.getCart().then(response => resolve(response)));
+    });
 
 
   }
@@ -116,7 +113,8 @@ export class CartStorageService{
       'userId': (JSON.parse(localStorage.getItem('currentUser')) as User).id
     };
     console.log(parameters);
-    this.http.post('/api/mergeCart', parameters) .toPromise()
+    this.http.post('/api/mergeCart', parameters)
+      .toPromise()
       .then()
       .catch();
   }

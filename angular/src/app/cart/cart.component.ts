@@ -80,7 +80,7 @@ export class CartComponent implements OnInit, OnChanges {
   updateCart() {
     this.cartContent = JSON.parse(localStorage.getItem('cart'));
 
-    console.log(this.cartContent);
+    //console.log(this.cartContent);
     this.totalPrice = 0;
     if (this.cartContent) {
       this.cartContent.forEach( x => {
@@ -113,10 +113,11 @@ export class CartComponent implements OnInit, OnChanges {
 
 
   mergenget() {
-
     this.cartStorageService.mergeAndGetCart(this.cartContent).then( result => {
-      this.cartContent =result ;
-    });
+      console.log('x');
+      console.log(result);
+      //this.cartContent = result;
+  });
    /* const _idToSend: Array<Number> = [];
     const _amountsToSend: Array<Number> = [];
     this.cartContent.forEach( x => {
