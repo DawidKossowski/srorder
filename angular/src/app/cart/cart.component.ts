@@ -31,6 +31,7 @@ export class CartComponent implements OnInit, OnChanges {
     this.updateCart();
     if(localStorage.getItem('currentUser')) {
       this.isUserLogged = true;
+
       this.updateStorage();
     } else {
       this.isUserLogged = false;
@@ -74,7 +75,8 @@ export class CartComponent implements OnInit, OnChanges {
     if(this.isUserLogged && this.cartContent!=null) {
       this.cartStorageService.saveCartInDB(this.cartContent);
     }
-    this.get();
+
+    //this.get();
     this.updateCart();
   }
 
