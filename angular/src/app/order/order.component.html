@@ -16,3 +16,14 @@
   </tr>
   </tbody>
 </table>
+
+<div class="orders-content" [ngClass]="{'open': bolin}">
+  <p>Content</p>
+  <div class="orders-additional">
+    <p>content 2</p>
+    <p>content 3</p>
+    <p>content 4</p>
+    <p>content 5</p>
+  </div>
+  <button class="orders-btn" (click)="test()">Add content</button>
+</div>

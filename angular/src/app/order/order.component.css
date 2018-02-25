@@ -1,0 +1,28 @@
+.orders-content {
+  position: relative;
+  padding: 10px;
+  border: 1px solid black;
+  transition: max-height 1s;
+  background: snow;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.orders-content.open {
+  max-height: 300px;
+}
+
+.orders-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.orders-additional {
+  opacity: 0;
+  transition: 1s;
+}
+
+.open .orders-additional {
+  opacity: 1;
+}

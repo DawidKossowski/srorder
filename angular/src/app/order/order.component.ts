@@ -9,11 +9,16 @@ import {OrderService} from "./service/order.service";
 })
 export class OrderComponent implements OnInit {
 
-  public orders: Array<Order>;
-  //public orders: Array<string>;
   constructor(private orderService: OrderService) { }
 
+  public orders: Array<Order>;
+  public bolin = false;
+
   ngOnInit() {
-    this.orderService.getOrders().then(orders => this.orders = orders);
+    this.orderService.getOrders().then(orders => { this.orders = orders; console.log(this.orders); });
+  }
+
+  test() {
+    this.bolin = !this.bolin;
   }
 }
