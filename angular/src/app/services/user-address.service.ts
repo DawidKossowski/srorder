@@ -34,7 +34,6 @@ export class UserAddressService {
     return this.http.get(this.allUsersAddressUrl, {params: {userId: id}})
       .toPromise()
       .then();
-
   }
 
   getAllUserAddress(id: number) {
@@ -52,6 +51,14 @@ export class UserAddressService {
             }
           });
         });
+      });
+    });
+  }
+
+  transformPlaceIdToAddress(placeId: string) {
+    return new Promise(resolve => {
+      this.geocoder.geocode({'placeId': placeId}, function(results, status) {
+        resolve(results[0].address_components);
       });
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order} from './order';
-import {OrderService} from "./service/order.service";
+import { OrderService } from './service/order.service';
+import { UserAddressService } from '../services/user-address.service';
 
 @Component({
   selector: 'app-order',
@@ -9,16 +10,30 @@ import {OrderService} from "./service/order.service";
 })
 export class OrderComponent implements OnInit {
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+              private userAddressService: UserAddressService) { }
 
   public orders: Array<Order>;
-  public bolin = false;
+  public formattedAdresses = [];
+  public numberOrderDetails: number;
 
   ngOnInit() {
-    this.orderService.getOrders().then(orders => { this.orders = orders; console.log(this.orders); });
+    this.orderService.getOrders().then(orders => {
+      this.orders = orders;
+
+      orders.forEach((e, index) => {
+        this.userAddressService.transformPlaceIdToAddress(e.address.address).then(result => this.formattedAdresses.push(result));
+      });
+
+      console.log(this.formattedAdresses);
+    });
   }
 
-  test() {
-    this.bolin = !this.bolin;
+  showDetails(id: number) {
+    if(id !== this.numberOrderDetails) {
+      this.numberOrderDetails = id;
+    } else {
+      this.numberOrderDetails = -1;
+    }
   }
 }

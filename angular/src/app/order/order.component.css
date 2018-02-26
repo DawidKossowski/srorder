@@ -1,10 +1,12 @@
 .orders-content {
   position: relative;
+  margin-bottom: 20px;
   padding: 10px;
   border: 1px solid black;
   transition: max-height 1s;
   background: snow;
   max-height: 50px;
+  font-weight: bold;
   overflow: hidden;
 }
 
@@ -19,6 +21,7 @@
 }
 
 .orders-additional {
+  font-weight: normal;
   opacity: 0;
   transition: 1s;
 }

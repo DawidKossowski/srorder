@@ -1,29 +1,31 @@
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Date</th>
-    <th>Products</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let order of orders">
-    <td>{{order.id}}</td>
-    <td>{{order.date}}</td>
-    <td *ngFor="let product of order.products">
-      <div>{{product.name}}</div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div *ngFor="let order of orders; let i = index">
+  <div class="orders-content" [ngClass]="{'open': numberOrderDetails == order.id}" >
+    <div class="col-md-1">
+      <p>{{order.id}}</p>
+    </div>
 
-<div class="orders-content" [ngClass]="{'open': bolin}">
-  <p>Content</p>
-  <div class="orders-additional">
-    <p>content 2</p>
-    <p>content 3</p>
-    <p>content 4</p>
-    <p>content 5</p>
+    <div class="col-md-3">
+      <p>{{order.address.name}} {{order.address.surname}}</p>
+      <div class="orders-additional">
+        <p>{{formattedAdresses[i][1].long_name}} {{formattedAdresses[i][0].long_name}}</p>
+        <p>{{formattedAdresses[i][3].long_name}}</p>
+        <p>{{formattedAdresses[i][5].long_name}}</p>
+        <p>{{formattedAdresses[i][6].long_name}}</p>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <p>Products: {{order.products.length}}</p>
+      <div class="orders-additional">
+        <p *ngFor="let product of order.products">{{product.name}}</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <p>{{order.date}}</p>
+    </div>
+
+    <button class="orders-btn" (click)="showDetails(order.id)">Add content</button>
   </div>
-  <button class="orders-btn" (click)="test()">Add content</button>
 </div>
+

@@ -11,7 +11,7 @@ package hello.orders;
 public class ViewOrder {
 
     public Integer id;
-    public Date date;
+    public String date;
 
     public List<Product> products;
 
