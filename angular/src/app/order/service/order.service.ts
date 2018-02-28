@@ -10,14 +10,12 @@ import {Order} from '../order'
 
 export class OrderService {
 
-  constructor(private http: Http) {
-
-  }
+  constructor(private http: Http) { }
 
   private ordersUrl = '/api/allOrders';
 
-  getOrders(): Promise<Order[]> {
-    return this.http.get(this.ordersUrl)
+  getOrders(userId: number): Promise<Order[]> {
+    return this.http.get(this.ordersUrl, { params: { userId: userId } })
       .toPromise()
       .then(response => response.json() as Order[])
       .catch(this.handleError);

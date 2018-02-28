@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,23 +67,25 @@ public class OrdersController {
     }
 
     @GetMapping (path="/allOrders")
-    public @ResponseBody Iterable<ViewOrder> getAllOrders() {
+    public @ResponseBody Iterable<ViewOrder> getAllOrders(@RequestParam Integer userId) {
         List<ViewOrder> result = new ArrayList<ViewOrder>();
-
         for (Order_Product order: order_productRepository.findAll()) {
+            Integer x = order.getOrder().getUser().getId();
+            if(x.equals(userId)) {
+                if(!result.stream().anyMatch(o -> o.id.equals(order.getOrder().getId()))) {
+                    ViewOrder vieworder = new ViewOrder();
+                    vieworder.products = new ArrayList<>();
+                    vieworder.id = order.getOrder().getId();
+                    vieworder.date = order.getOrder().getDate().toString();
+                    vieworder.address = order.getOrder().getAddress();
 
-            if(!result.stream().anyMatch(o -> o.id.equals(order.getOrder().getId()))) {
-                ViewOrder vieworder = new ViewOrder();
-                vieworder.products = new ArrayList<>();
-                vieworder.id = order.getOrder().getId();
-                vieworder.date = order.getOrder().getDate().toString();
-                vieworder.address = order.getOrder().getAddress();
-
-                vieworder.products.add(order.getProduct());
-                result.add(vieworder);
-            }
-            else {
-                result.get(order.getOrder().getId() - 1).products.add(order.getProduct());
+                    vieworder.products.add(order.getProduct());
+                    result.add(vieworder);
+                }
+                else {
+                    Integer y = result.size() - 1;
+                    result.get(y).products.add(order.getProduct());
+                }
             }
         }
 

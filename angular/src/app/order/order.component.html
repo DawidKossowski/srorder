@@ -6,7 +6,7 @@
 
     <div class="col-md-3">
       <p>{{order.address.name}} {{order.address.surname}}</p>
-      <div class="orders-additional">
+      <div class="orders-additional" *ngIf="formattedAdresses[i]">
         <p>{{formattedAdresses[i][1].long_name}} {{formattedAdresses[i][0].long_name}}</p>
         <p>{{formattedAdresses[i][3].long_name}}</p>
         <p>{{formattedAdresses[i][5].long_name}}</p>
@@ -25,7 +25,10 @@
       <p>{{order.date}}</p>
     </div>
 
-    <button class="orders-btn" (click)="showDetails(order.id)">Add content</button>
+    <button class="orders-btn" (click)="showDetails(order.id)">
+      <span *ngIf="order.id != numberOrderDetails">View more</span>
+      <span *ngIf="order.id == numberOrderDetails">Show less</span>
+    </button>
   </div>
 </div>
 

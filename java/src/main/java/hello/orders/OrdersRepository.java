@@ -10,4 +10,5 @@ public interface OrdersRepository extends CrudRepository<Orders, Long> {
 
     @Query("SELECT o FROM Orders o WHERE o.id = :id")
     Orders findOrderByIntegerId(@Param("id") Integer id);
+
 }

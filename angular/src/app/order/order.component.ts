@@ -18,14 +18,14 @@ export class OrderComponent implements OnInit {
   public numberOrderDetails: number;
 
   ngOnInit() {
-    this.orderService.getOrders().then(orders => {
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(user.id);
+    this.orderService.getOrders(user.id).then(orders => {
       this.orders = orders;
 
       orders.forEach((e, index) => {
         this.userAddressService.transformPlaceIdToAddress(e.address.address).then(result => this.formattedAdresses.push(result));
       });
-
-      console.log(this.formattedAdresses);
     });
   }
 

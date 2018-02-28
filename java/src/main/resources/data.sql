@@ -17,7 +17,7 @@ INSERT INTO user (sex, name, surname, email, password, deafult_address) VALUES
   ('male', 'Piotr', 'Kowalski', 'a', 'a', 2);
 
   INSERT INTO user (sex, name, surname, email, password, deafult_address) VALUES
-  ('male', 'Piotr', 'Kowalski', 'b', 'b', 3);
+  ('male', 'Jakub', 'Kowalski', 'b', 'b', 3);
 
 INSERT INTO `user_address` (address_id, user_id) VALUES (1, 2);
 INSERT INTO `user_address` (address_id, user_id) VALUES (3, 2);
