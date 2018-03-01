@@ -28,6 +28,7 @@ import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
 import { MapComponent } from './google-maps-2/map/map.component';
 import {UserAddressService} from "./services/user-address.service";
 import { ChooseAddressComponent } from './choose-address/choose-address.component';
+import {SortServiceService} from "./services/sort-service.service";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { ChooseAddressComponent } from './choose-address/choose-address.componen
     AppRoutingModule
   ],
   providers: [ProductService, NewProductService, OrderService, CartStorageService,
-              UserStorageService, UserAddressService ],
+              UserStorageService, UserAddressService, SortServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

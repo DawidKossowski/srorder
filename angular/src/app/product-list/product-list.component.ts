@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import { Product } from './product';
 import { ProductService } from './service/product.service';
 import { CartStorageService } from '../services/cart-storage.service';
+import { SortServiceService} from "../services/sort-service.service";
 
 @Component({
   selector: 'app-product-list',
@@ -13,9 +14,13 @@ export class ProductListComponent implements OnInit {
   private productsToShow: Array<Product>;
   private productsToCart: Array<Product>;
   private productsName: Array<string> = [];
+  public isInDropdown = false;
+  public isArrowUp = false;
+  public chosenSort= 'choose';
 
   constructor(private productService: ProductService,
-              private cartStorageService: CartStorageService) { }
+              private cartStorageService: CartStorageService,
+              private sortServiceService: SortServiceService) { }
 
   ngOnInit() {
     this.productService.getProducts().then(products => {
@@ -45,5 +50,47 @@ export class ProductListComponent implements OnInit {
     } else {
       this.productsToShow = this.products;
     }
+  }
+  toggleStateDropdown(event) {
+    if (event.target.closest('.dropdown-toggle')) {
+      this.isInDropdown = !this.isInDropdown;
+    } else {
+      this.isInDropdown = false;
+    }
+    return false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (event.target.className !== 'dropdown-toggle') {
+      this.isInDropdown = false;
+    }
+
+  }
+  flipArrow() {
+    this.isArrowUp = !this.isArrowUp;
+    this.productsToShow.reverse();
+  }
+
+  alphabeticSort() {
+    this.chosenSort = 'Alphabet';
+    this.sortServiceService.sortAlphabetically().then(response=> {
+      if(this.isArrowUp) {
+        this.productsToShow = response;
+      } else {
+        this.productsToShow = response.reverse();
+      }
+    });
+  }
+
+  PriceSort() {
+    this.chosenSort = 'Price';
+    this.sortServiceService.sortByPrice().then(response=> {
+      if(this.isArrowUp) {
+        this.productsToShow = response;
+      } else {
+        this.productsToShow = response.reverse();
+      }
+    });
   }
 }

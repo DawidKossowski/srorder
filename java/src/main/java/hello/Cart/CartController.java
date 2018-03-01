@@ -129,6 +129,7 @@ public class CartController {
                         cartitem.amount = cartToSave.amounts.get(i);
                         this.cartItemRepository.save(cartitem);
                     }*/
+
                 }
             }
             if(!isAlreadyInCart) { //create new if doesnt exists in cart

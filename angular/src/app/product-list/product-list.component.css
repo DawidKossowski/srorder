@@ -1,0 +1,6 @@
+.sort-menu {
+  display: flex;
+}
+.arrow {
+ transform: rotate(180deg);
+}
