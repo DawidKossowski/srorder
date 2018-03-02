@@ -18,6 +18,7 @@ export class ProductListComponent implements OnInit {
   public isArrowUp = false;
   public chosenSort= 'choose';
 
+
   constructor(private productService: ProductService,
               private cartStorageService: CartStorageService,
               private sortServiceService: SortServiceService) { }
@@ -51,22 +52,7 @@ export class ProductListComponent implements OnInit {
       this.productsToShow = this.products;
     }
   }
-  toggleStateDropdown(event) {
-    if (event.target.closest('.dropdown-toggle')) {
-      this.isInDropdown = !this.isInDropdown;
-    } else {
-      this.isInDropdown = false;
-    }
-    return false;
-  }
 
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (event.target.className !== 'dropdown-toggle') {
-      this.isInDropdown = false;
-    }
-
-  }
   flipArrow() {
     this.isArrowUp = !this.isArrowUp;
     this.productsToShow.reverse();
@@ -92,5 +78,9 @@ export class ProductListComponent implements OnInit {
         this.productsToShow = response.reverse();
       }
     });
+  }
+
+  test() {
+    console.log(this.chosenSort);
   }
 }
