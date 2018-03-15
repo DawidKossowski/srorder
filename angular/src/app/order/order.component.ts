@@ -18,7 +18,7 @@ export class OrderComponent implements OnInit {
   public numberOrderDetails: number;
 
   ngOnInit() {
-    let user = JSON.parse(localStorage.getItem('currentUser'));
+    const user = JSON.parse(localStorage.getItem('currentUser'));
     console.log(user.id);
     this.orderService.getOrders(user.id).then(orders => {
       this.orders = orders;

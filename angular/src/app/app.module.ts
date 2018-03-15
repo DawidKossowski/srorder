@@ -29,6 +29,10 @@ import { MapComponent } from './google-maps-2/map/map.component';
 import {UserAddressService} from "./services/user-address.service";
 import { ChooseAddressComponent } from './choose-address/choose-address.component';
 import {SortServiceService} from "./services/sort-service.service";
+import { StatisticComponent } from './statistic/statistic.component';
+import { ChartsModule } from 'ng2-charts';
+import { NgxCarouselModule } from 'ngx-carousel';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import {SortServiceService} from "./services/sort-service.service";
     MyFocusDirective,
     GoogleMaps2Component,
     MapComponent,
-    ChooseAddressComponent
+    ChooseAddressComponent,
+    StatisticComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -58,7 +63,9 @@ import {SortServiceService} from "./services/sort-service.service";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxCarouselModule,
+    ChartsModule
   ],
   providers: [ProductService, NewProductService, OrderService, CartStorageService,
               UserStorageService, UserAddressService, SortServiceService ],

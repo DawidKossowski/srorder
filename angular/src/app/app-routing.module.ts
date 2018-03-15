@@ -7,15 +7,17 @@ import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { OrderConfirmationComponent } from "./order-confirmation/order-confirmation.component";
 import {RegisterComponent} from "./User/register/register.component";
 import {LoginComponent} from "./User/login/login.component";
+import { StatisticComponent } from './statistic/statistic.component';
 
 const routes: Routes = [
   { path: 'list', component: ProductListComponent },
   { path: 'newProduct', component: NewProductComponent },
   { path: 'orders', component: OrderComponent },
-  { path: 'map', component: GoogleMapsComponent},
-  { path: 'orderConfirmation', component: OrderConfirmationComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'map', component: GoogleMapsComponent },
+  { path: 'orderConfirmation', component: OrderConfirmationComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'statistic', component: StatisticComponent }
 ];
 
 @NgModule({
