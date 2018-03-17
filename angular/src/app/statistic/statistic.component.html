@@ -1,5 +1,5 @@
 <ngx-carousel
-  [inputs]="carouselOne"
+  [inputs]="carouselConfig"
   (onMove)="update($event)">
 
   <ngx-item NgxCarouselItem *ngFor="let i of iterator; let idx=index">
@@ -11,8 +11,6 @@
               [chartType]="chartType[idx]"></canvas>
     </div>
   </ngx-item>
-
-
 
   <button NgxCarouselPrev class='leftRs'>&lt;</button>
   <button NgxCarouselNext class='rightRs'>&gt;</button>

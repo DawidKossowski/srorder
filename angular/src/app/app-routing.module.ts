@@ -10,6 +10,7 @@ import {LoginComponent} from "./User/login/login.component";
 import { StatisticComponent } from './statistic/statistic.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'list', component: ProductListComponent },
   { path: 'newProduct', component: NewProductComponent },
   { path: 'orders', component: OrderComponent },

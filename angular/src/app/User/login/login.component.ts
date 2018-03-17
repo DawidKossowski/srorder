@@ -5,14 +5,15 @@ import {UserStorageService} from "../../services/user-storage.service";
 import {User} from "../User";
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
-
-
+import {fadeInAnimation} from "../../router.animations";
 
 
 @Component({
-  selector: 'app-login',
+  moduleId: module.id.toString(),
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
   public email: string;

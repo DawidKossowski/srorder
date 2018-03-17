@@ -17,22 +17,24 @@ import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
-import { CartStorageService } from "./services/cart-storage.service";
+import { CartStorageService } from './services/cart-storage.service';
 import { RegisterComponent } from './User/register/register.component';
 import { LoginComponent } from './User/login/login.component';
-import { UserStorageService } from "./services/user-storage.service";
+import { UserStorageService } from './services/user-storage.service';
 import { AutoCompleterComponent } from './auto-completer/auto-completer.component';
 import { ProductFilterComponent } from './product-list/product-filter/product-filter.component';
 import { MyFocusDirective } from './directives/my-focus.directive';
 import { GoogleMaps2Component } from './google-maps-2/google-maps-2.component';
 import { MapComponent } from './google-maps-2/map/map.component';
-import {UserAddressService} from "./services/user-address.service";
+import { UserAddressService } from './services/user-address.service';
 import { ChooseAddressComponent } from './choose-address/choose-address.component';
-import {SortServiceService} from "./services/sort-service.service";
+import { SortServiceService } from './services/sort-service.service';
 import { StatisticComponent } from './statistic/statistic.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgxCarouselModule } from 'ngx-carousel';
 import 'hammerjs';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import 'hammerjs';
     HttpModule,
     AppRoutingModule,
     NgxCarouselModule,
-    ChartsModule
+    ChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [ProductService, NewProductService, OrderService, CartStorageService,
               UserStorageService, UserAddressService, SortServiceService ],

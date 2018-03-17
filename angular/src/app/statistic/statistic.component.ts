@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import { Chart } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
 import { NgxCarousel } from 'ngx-carousel';
-import {BaseChartDirective} from "ng2-charts";
+import {fadeInAnimation} from "../router.animations";
 
 @Component({
   selector: 'app-statistic',
@@ -10,11 +9,7 @@ import {BaseChartDirective} from "ng2-charts";
 })
 export class StatisticComponent implements OnInit {
 
-  test2() {
-    console.log('x');
-  }
-
-  public carouselOne: NgxCarousel = {
+  public carouselConfig = {
     grid: {xs: 1, sm: 1, md: 1, lg: 1, all: 0},
     slide: 1,
     speed: 400,
@@ -44,7 +39,7 @@ export class StatisticComponent implements OnInit {
       });
     });
 
-    setTimeout(() => this.clearSlide(0), 10);
+    setTimeout(() => this.clearSlide(0), 500);
   }
 
   update(el) {

@@ -6,10 +6,13 @@ import {UserStorageService} from "../../services/user-storage.service";
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
 import {CartStorageService} from "../../services/cart-storage.service";
+import {fadeInAnimation} from "../../router.animations";
 @Component({
-  selector: 'app-register',
+  moduleId: module.id.toString(),
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class RegisterComponent implements OnInit {
 
