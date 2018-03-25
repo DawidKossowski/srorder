@@ -8,6 +8,7 @@ import { OrderConfirmationComponent } from "./order-confirmation/order-confirmat
 import {RegisterComponent} from "./User/register/register.component";
 import {LoginComponent} from "./User/login/login.component";
 import { StatisticComponent } from './statistic/statistic.component';
+import {TakasetabelkaComponent} from "./takasetabelka/takasetabelka.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'orderConfirmation', component: OrderConfirmationComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'statistic', component: StatisticComponent }
+  { path: 'statistic', component: StatisticComponent },
+  { path: 'takasetabelka', component: TakasetabelkaComponent}
 ];
 
 @NgModule({

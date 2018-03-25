@@ -6,11 +6,13 @@
 
 <div class="sort-menu ">
 <label>Sort by: </label>
-  <select name="multipleSelect" id="multipleSelect" [(ngModel)] = "chosenSort">
+  <select id="serviceType" name="type" class="form-control"
+          (change)="setSelectedType($event.target.value)">
     <option value="Price">Price</option>
     <option value="Alphabet">Alphabet</option>
+
   </select><br>
-  <button [ngClass]="{'arrow': isArrowUp}" (click)="flipArrow()"><span class="caret"></span></button>
+  <button class="btn"  (click)="flipArrow()"><span [ngClass]="{'arrow': isArrowUp}" class="caret"></span></button>
 </div>
 <br/>
 

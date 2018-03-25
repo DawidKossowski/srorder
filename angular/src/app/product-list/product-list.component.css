@@ -1,5 +1,7 @@
 .sort-menu {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .arrow {
  transform: rotate(180deg);
