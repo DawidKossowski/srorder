@@ -1,14 +1,23 @@
-.expanded {
-  height: 200px;
-opacity: 1;
+.detailwrapper {
+
 }
 .details {
+  display: block;
   opacity: 0;
   transition: 1s;
 }
+.expanded {
+  opacity: 1;
+  height: 200px;
+}
 .row {
-border: 1px solid grey;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid grey;
+  justify-content:  center;
 }
-.details .expanded {
-  background-color: green;
+.name .surname {
+  display: inline-block;
+  margin: 5px;
 }
+

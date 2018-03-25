@@ -1,9 +1,12 @@
 <div class="container" *ngFor="let element of table">
   <div class="row"
   (click)="expand(element.id)">
-    <div class="name"> {{element.name}}</div>
-    <div class="surname"> {{element.surname}}</div>
-    <div class="details" [ngClass] ="{'expanded': expandedElements[element.id]}"> {{element.details}}</div>
+    <div class="tableElement name"> {{element.name}}</div>
+    <div class="tableElement surname"> {{element.surname}}</div>
+    <div class="detailwrapper">
+
+      <div class="details" [ngClass] ="{'expanded': expandedElements[element.id]}"> {{element.details}}</div>
+    </div>
   <br/>
   </div>
 </div>
