@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   private productsName: Array<string> = [];
   public isInDropdown = false;
   public isArrowUp = false;
-  public chosenSort= 'choose';
+  public chosenSort = 'choose';
 
 
   constructor(private productService: ProductService,
@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getFilterResult(result: string) {
-    if(result) {
+    if (result) {
       this.productsToShow = this.products.filter(p => p.name === result);
     } else {
       this.productsToShow = this.products;
@@ -60,8 +60,8 @@ export class ProductListComponent implements OnInit {
 
   alphabeticSort() {
     this.chosenSort = 'Alphabet';
-    this.sortServiceService.sortAlphabetically().then(response=> {
-      if(this.isArrowUp) {
+    this.sortServiceService.sortAlphabetically().then(response => {
+      if (this.isArrowUp) {
         this.productsToShow = response;
       } else {
         this.productsToShow = response.reverse();
@@ -71,16 +71,12 @@ export class ProductListComponent implements OnInit {
 
   PriceSort() {
     this.chosenSort = 'Price';
-    this.sortServiceService.sortByPrice().then(response=> {
-      if(this.isArrowUp) {
+    this.sortServiceService.sortByPrice().then(response => {
+      if (this.isArrowUp) {
         this.productsToShow = response;
       } else {
         this.productsToShow = response.reverse();
       }
     });
-  }
-
-  test() {
-    console.log(this.chosenSort);
   }
 }
