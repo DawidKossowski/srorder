@@ -35,6 +35,7 @@ import { NgxCarouselModule } from 'ngx-carousel';
 import 'hammerjs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TakasetabelkaComponent } from './takasetabelka/takasetabelka.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GoogleMaps2Component,
     MapComponent,
     ChooseAddressComponent,
-    StatisticComponent
+    StatisticComponent,
+    TakasetabelkaComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

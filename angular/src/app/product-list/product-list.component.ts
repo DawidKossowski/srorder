@@ -14,7 +14,6 @@ export class ProductListComponent implements OnInit {
   private productsToShow: Array<Product>;
   private productsToCart: Array<Product>;
   private productsName: Array<string> = [];
-  public isInDropdown = false;
   public isArrowUp = false;
   public chosenSort= 'choose';
 
@@ -79,8 +78,23 @@ export class ProductListComponent implements OnInit {
       }
     });
   }
+  setSelectedType(value) {
+    console.log(value);
 
-  test() {
-    console.log(this.chosenSort);
+    switch(value) {
+      case "Price": {
+        this.PriceSort();
+        break;
+      }
+      case "Alphabet": {
+        this.alphabeticSort();
+        break;
+      }
+      default: {
+        //statements;
+        break;
+      }
+    }
   }
+
 }

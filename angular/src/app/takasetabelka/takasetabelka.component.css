@@ -1,0 +1,14 @@
+.expanded {
+  height: 200px;
+opacity: 1;
+}
+.details {
+  opacity: 0;
+  transition: 1s;
+}
+.row {
+border: 1px solid grey;
+}
+.details .expanded {
+  background-color: green;
+}
